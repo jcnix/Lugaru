@@ -105,7 +105,7 @@ else
 	LD := g++
 
   	CFLAGS += -DPLATFORM_LINUX=1
-  	LDFLAGS += -lSDL -ljpeg
+  	LDFLAGS += -lSDL -ljpeg -lGL
 
   	ifeq ($(strip $(use_devil)),true)
     	LDFLAGS += ./libIL.so.1 ./libILU.so.1 ./libILUT.so.1
@@ -129,8 +129,6 @@ DEFINES += \
 INCLUDES += \
 			-I$(SRCDIR) \
 			-I$(SDLDIR)/include \
-			-I./OpenGL/ \
-			-I./OpenGL/GL \
 
 ifeq ($(strip $(use_devil)),true)
     DEFINES += -DUSE_DEVIL=1
