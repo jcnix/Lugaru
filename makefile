@@ -14,7 +14,6 @@ OPT += -O3 -fno-strict-aliasing -falign-loops=16 -fno-math-errno
 BINDIR := bin
 RUNDIR := Data
 SRCDIR := Source
-SDLDIR := SDL12
 LIBPNGDIR := libpng-1.2.8
 ZLIBDIR := zlib-1.2.3
 OPENALDIR := OpenAL
@@ -124,8 +123,7 @@ DEFINES += \
 	-DBinIO_STDINT_HEADER="<stdint.h>" \
 
 INCLUDES += \
-			-I$(SRCDIR) \
-			-I$(SDLDIR)/include \
+			-I$(SRCDIR)
 
 ifeq ($(strip $(use_devil)),true)
     DEFINES += -DUSE_DEVIL=1

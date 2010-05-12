@@ -39,7 +39,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "TGALoader.h"
 
 #if USE_SDL
-#include "SDL.h"
+#include "SDL/SDL.h"
 #endif
 
 #if !PLATFORM_MACOSX
