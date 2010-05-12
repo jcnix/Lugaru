@@ -1,0 +1,7 @@
+This is my fork of Lugaru, Wolfire's ninja rabbit fighting game.
+On May 11, 2010 Wolfire released the game as open source software
+under the GNU GPL.
+
+This fork's primary focus is getting Lugaru's code to actually work.
+The released code is messy, especially the build system.
+
