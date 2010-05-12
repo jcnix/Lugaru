@@ -54,8 +54,7 @@ set(LUGARU_SRCS
 	unpack_private.c
 	Weapons.cpp
 	MacCompatibility.cpp
-	logger/logger.cpp
-	OpenGL_Windows.cpp 
+	OpenGL_Windows.cpp
 	openal_wrapper.cpp
 	WinInput.cpp)
 
@@ -138,7 +137,7 @@ if(WIN32)
   set(LUGARU_H
 	${LUGARU_H}
 	WinDefs.h
-	res/lugaru.h)
+	res/resource.h)
 endif(WIN32)
 
 if(WIN32)
