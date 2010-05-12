@@ -18,7 +18,6 @@ SDLDIR := SDL12
 LIBPNGDIR := libpng-1.2.8
 ZLIBDIR := zlib-1.2.3
 OPENALDIR := OpenAL
-LIBVORBISDIR := libvorbis-1.0.1
 
 ifeq ($(strip $(macosx)),true)
 	CXX := g++-4.0
@@ -103,7 +102,7 @@ else
 	LD := g++
 
   	CFLAGS += -DPLATFORM_LINUX=1
-  	LDFLAGS += -lSDL -ljpeg -lGL -lGLU -logg
+  	LDFLAGS += -lSDL -ljpeg -lGL -lGLU -logg -lvorbis -lvorbisenc -lvorbisfile
 
   	ifeq ($(strip $(use_devil)),true)
     	LDFLAGS += ./libIL.so.1 ./libILU.so.1 ./libILUT.so.1
@@ -138,7 +137,7 @@ endif
 
 ifeq ($(strip $(use_fmod)),false)
     DEFINES += -DUSE_OPENAL=1
-    INCLUDES += -I$(OPENALDIR)/include -I$(LIBVORBISDIR)/include
+    INCLUDES += -I$(OPENALDIR)/include
 endif
 
 CFLAGS += -g -c $(OPT) $(INCLUDES) $(DEFINES) -fsigned-char -pipe -w
@@ -228,36 +227,8 @@ ZLIBSRCS = \
 ZLIBSRCS := $(foreach f,$(ZLIBSRCS),$(ZLIBDIR)/$(f))
 
 
-VORBISSRCS := \
-	analysis.o \
-    bitrate.o \
-    block.o \
-    codebook.o \
-    envelope.o \
-    floor0.o \
-    floor1.o \
-    info.o \
-    lpc.o \
-    lsp.o \
-    mapping0.o \
-    mdct.o \
-    psy.o \
-    registry.o \
-    res0.o \
-    sharedbook.o \
-    smallft.o \
-    synthesis.o \
-    vorbisfile.o \
-    window.o
-
-VORBISSRCS := $(foreach f,$(VORBISSRCS),$(LIBVORBISDIR)/lib/$(f))
-
 ifeq ($(strip $(use_devil)),false)
     SRCS += $(PNGSRCS) $(ZLIBSRCS)
-endif
-
-ifeq ($(strip $(use_fmod)),false)
-    SRCS += $(VORBISSRCS)
 endif
 
 OBJS := $(SRCS:.CC=.o)
@@ -302,7 +273,6 @@ clean:
 	rm -f $(BINDIR)/$(SRCDIR)/logger/*.o
 	rm -f $(BINDIR)/$(LIBPNGDIR)/*.o
 	rm -f $(BINDIR)/$(ZLIBDIR)/*.o
-	rm -f $(BINDIR)/$(LIBVORBISDIR)/lib/*.o
 	rm -f $(EXE)
 
 # end of makefile ...
