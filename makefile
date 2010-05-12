@@ -11,7 +11,7 @@ endif
 OPT += -O3 -fno-strict-aliasing -falign-loops=16 -fno-math-errno
 #OPT += -Os -fno-strict-aliasing
 
-BINDIR := bin
+BINDIR := obj
 RUNDIR := Data
 SRCDIR := Source
 LIBPNGDIR := libpng-1.2.8
@@ -266,11 +266,7 @@ $(EXE) : $(OBJS) $(APPOBJS)
 	$(LD) -o $@ $(LDFLAGS) $(OBJS) $(APPOBJS) $(POSTLDFLAGS)
 
 clean:
-	rm -f $(BINDIR)/*.o
-	rm -f $(BINDIR)/$(SRCDIR)/*.o
-	rm -f $(BINDIR)/$(SRCDIR)/logger/*.o
-	rm -f $(BINDIR)/$(LIBPNGDIR)/*.o
-	rm -f $(BINDIR)/$(ZLIBDIR)/*.o
+	rm -rf $(BINDIR)
 	rm -f $(EXE)
 
 # end of makefile ...
