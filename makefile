@@ -18,7 +18,6 @@ SDLDIR := SDL12
 LIBPNGDIR := libpng-1.2.8
 ZLIBDIR := zlib-1.2.3
 OPENALDIR := OpenAL
-LIBOGGDIR := libogg-1.0
 LIBVORBISDIR := libvorbis-1.0.1
 
 ifeq ($(strip $(macosx)),true)
@@ -104,7 +103,7 @@ else
 	LD := g++
 
   	CFLAGS += -DPLATFORM_LINUX=1
-  	LDFLAGS += -lSDL -ljpeg -lGL -lGLU
+  	LDFLAGS += -lSDL -ljpeg -lGL -lGLU -logg
 
   	ifeq ($(strip $(use_devil)),true)
     	LDFLAGS += ./libIL.so.1 ./libILU.so.1 ./libILUT.so.1
@@ -139,7 +138,7 @@ endif
 
 ifeq ($(strip $(use_fmod)),false)
     DEFINES += -DUSE_OPENAL=1
-    INCLUDES += -I$(OPENALDIR)/include -I$(LIBOGGDIR)/include -I$(LIBVORBISDIR)/include
+    INCLUDES += -I$(OPENALDIR)/include -I$(LIBVORBISDIR)/include
 endif
 
 CFLAGS += -g -c $(OPT) $(INCLUDES) $(DEFINES) -fsigned-char -pipe -w
@@ -229,13 +228,6 @@ ZLIBSRCS = \
 ZLIBSRCS := $(foreach f,$(ZLIBSRCS),$(ZLIBDIR)/$(f))
 
 
-OGGSRCS := \
-	bitwise.o \
-	framing.o
-
-OGGSRCS := $(foreach f,$(OGGSRCS),$(LIBOGGDIR)/src/$(f))
-
-
 VORBISSRCS := \
 	analysis.o \
     bitrate.o \
@@ -265,7 +257,7 @@ ifeq ($(strip $(use_devil)),false)
 endif
 
 ifeq ($(strip $(use_fmod)),false)
-    SRCS += $(OGGSRCS) $(VORBISSRCS)
+    SRCS += $(VORBISSRCS)
 endif
 
 OBJS := $(SRCS:.CC=.o)
@@ -310,7 +302,6 @@ clean:
 	rm -f $(BINDIR)/$(SRCDIR)/logger/*.o
 	rm -f $(BINDIR)/$(LIBPNGDIR)/*.o
 	rm -f $(BINDIR)/$(ZLIBDIR)/*.o
-	rm -f $(BINDIR)/$(LIBOGGDIR)/src/*.o
 	rm -f $(BINDIR)/$(LIBVORBISDIR)/lib/*.o
 	rm -f $(EXE)
 
