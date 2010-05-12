@@ -29,11 +29,11 @@ ifeq ($(strip $(macosx)),true)
 	LD := g++-4.0
 
   	ifeq ($(strip $(use_devil)),true)
-        $(error DEVIL isn't supported in the Mac OS X builds right now.)
+        $(error DEVIL isnt supported in the Mac OS X builds right now.)
     endif
 
   	ifeq ($(strip $(use_fmod)),true)
-        $(error FMOD isn't supported in the Mac OS X builds right now.)
+        $(error FMOD isnt supported in the Mac OS X builds right now.)
     endif
 
 	ifeq ($(strip $(XCODE_DIR)),)
@@ -101,12 +101,12 @@ ifeq ($(strip $(macosx)),true)
   	LDFLAGS += -framework Cocoa -framework OpenGL -framework IOKit -framework CoreFoundation -framework Carbon -framework OpenAL
   	LDFLAGS += ./libSDL-1.2.0.dylib ./libSDLmain-osx.a
 else
-	CXX := /opt/crosstool/gcc-4.1.2-glibc-2.3.6/i686-unknown-linux-gnu/i686-unknown-linux-gnu/bin/g++
-	CC := /opt/crosstool/gcc-4.1.2-glibc-2.3.6/i686-unknown-linux-gnu/i686-unknown-linux-gnu/bin/gcc
-	LD := /opt/crosstool/gcc-4.1.2-glibc-2.3.6/i686-unknown-linux-gnu/i686-unknown-linux-gnu/bin/g++
+	CXX := g++
+	CC := gcc
+	LD := g++
 
   	CFLAGS += -DPLATFORM_LINUX=1
-  	LDFLAGS += ./libSDL-1.2.so.0 -Wl,-rpath,\$$ORIGIN
+  	LDFLAGS += -lSDL
 
   	ifeq ($(strip $(use_devil)),true)
     	LDFLAGS += ./libIL.so.1 ./libILU.so.1 ./libILUT.so.1
@@ -115,7 +115,7 @@ else
   	ifeq ($(strip $(use_fmod)),true)
     	POSTLDFLAGS += -lpthread ./libfmod-linux-x86.a
   	else
-    	LDFLAGS += ./libopenal.so.1
+    	LDFLAGS += -lopenal
   	endif
 endif
 
