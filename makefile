@@ -16,7 +16,6 @@ RUNDIR := Data
 SRCDIR := Source
 SDLDIR := SDL12
 LIBPNGDIR := libpng-1.2.8
-JPEGLIBDIR := jpeg-6b
 ZLIBDIR := zlib-1.2.3
 OPENALDIR := OpenAL
 GLUDIR := GLU
@@ -106,7 +105,7 @@ else
 	LD := g++
 
   	CFLAGS += -DPLATFORM_LINUX=1
-  	LDFLAGS += -lSDL
+  	LDFLAGS += -lSDL -ljpeg
 
   	ifeq ($(strip $(use_devil)),true)
     	LDFLAGS += ./libIL.so.1 ./libILU.so.1 ./libILUT.so.1
@@ -138,7 +137,7 @@ ifeq ($(strip $(use_devil)),true)
     INCLUDES += -I$(SRCDIR)/devil/include
 else
     DEFINES += -DZ_PREFIX=1
-    INCLUDES += -I$(ZLIBDIR) -I$(LIBPNGDIR) -I$(JPEGLIBDIR)
+    INCLUDES += -I$(ZLIBDIR) -I$(LIBPNGDIR) -I/usr/include
 endif
 
 ifeq ($(strip $(use_fmod)),false)
@@ -215,55 +214,6 @@ PNGSRCS := \
 
 PNGSRCS := $(foreach f,$(PNGSRCS),$(LIBPNGDIR)/$(f))
 
-JPEGSRCS := \
-	jdapistd.c \
-    jdmaster.c \
-    jdapimin.c \
-    jcapimin.c \
-    jdmerge.c \
-    jdatasrc.c \
-    jdatadst.c \
-    jdcoefct.c \
-    jdcolor.c \
-    jddctmgr.c \
-    jdhuff.c \
-    jdinput.c \
-    jdmainct.c \
-    jdmarker.c \
-    jdphuff.c \
-    jdpostct.c \
-    jdsample.c \
-    jdtrans.c \
-    jerror.c \
-    jidctflt.c \
-    jidctfst.c \
-    jidctint.c \
-    jidctred.c \
-    jmemmgr.c \
-    jutils.c \
-    jmemnobs.c \
-    jquant1.c \
-    jquant2.c \
-    jcomapi.c \
-    jcmarker.c \
-    jcapistd.c \
-    jcparam.c \
-    jcinit.c \
-    jcdctmgr.c \
-    jccoefct.c \
-    jcmainct.c \
-    jfdctflt.c \
-    jfdctint.c \
-    jfdctfst.c \
-    jchuff.c \
-    jcphuff.c \
-    jcsample.c \
-    jcmaster.c \
-    jccolor.c \
-    jcprepct.c \
-
-JPEGSRCS := $(foreach f,$(JPEGSRCS),$(JPEGLIBDIR)/$(f))
-
 
 ZLIBSRCS = \
 	adler32.c \
@@ -334,7 +284,7 @@ ifeq ($(strip $(macosx)),false)
 endif
 
 ifeq ($(strip $(use_devil)),false)
-    SRCS += $(PNGSRCS) $(JPEGSRCS) $(ZLIBSRCS)
+    SRCS += $(PNGSRCS) $(ZLIBSRCS)
 endif
 
 ifeq ($(strip $(use_fmod)),false)
@@ -383,7 +333,6 @@ clean:
 	rm -f $(BINDIR)/$(SRCDIR)/logger/*.o
 	rm -f $(BINDIR)/$(GLUDIR)/*.o
 	rm -f $(BINDIR)/$(LIBPNGDIR)/*.o
-	rm -f $(BINDIR)/$(JPEGLIBDIR)/*.o
 	rm -f $(BINDIR)/$(ZLIBDIR)/*.o
 	rm -f $(BINDIR)/$(LIBOGGDIR)/src/*.o
 	rm -f $(BINDIR)/$(LIBVORBISDIR)/lib/*.o
