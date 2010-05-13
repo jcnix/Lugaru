@@ -1,0 +1,34 @@
+AC_INIT(lugaru, 1.0, jonescaseyb@gmail.com)
+AM_INIT_AUTOMAKE(lugaru, 1.0)
+AC_CONFIG_HEADERS(Source/config.h)
+AC_PROG_INSTALL
+AC_CONFIG_MACRO_DIR([m4])
+AC_PREFIX_DEFAULT(/usr/games)
+
+AC_PROG_CPP
+AC_PROG_CC
+AC_LANG_C
+AC_PROG_CXX
+AC_LANG_CPLUSPLUS
+AC_HEADER_STDC
+
+PKG_CHECK_MODULES(SDL, sdl)
+PKG_CHECK_MODULES(OpenAL, openal)
+PKG_CHECK_MODULES(GL, gl glu)
+PKG_CHECK_MODULES(png, libpng)
+PKG_CHECK_MODULES(zlib, zlib)
+PKG_CHECK_MODULES(ogg, ogg)
+PKG_CHECK_MODULES(vorbis, vorbis vorbisfile)
+
+AC_DEFINE([PLATFORM_UNIX], [1], [UNIX])
+AC_DEFINE([USE_SDL], [1], [Use SDL])
+AC_DEFINE([USE_OPENAL], [1], [Use OpenAL])
+AC_DEFINE([BinIO_STDINT_HEADER], [<stdint.h>], [BinIO_STDINT_HEADER])
+AC_DEFINE([TRUE], [1], [TRUE])
+AC_DEFINE([FALSE], [0], [FALSE])
+AC_DEFINE([stricmp], [strcasecmp], [stricmp])
+AC_DEFINE([Z_PREFIX], [1], [Z_PREFIX])
+
+AC_CONFIG_FILES([Makefile bin/Makefile])
+AC_OUTPUT
+

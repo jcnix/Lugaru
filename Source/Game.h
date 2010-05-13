@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef _GAME_H_
 #define _GAME_H_
 
+#include "config.h"
 #if (defined(__APPLE__) && defined(__MACH__))
 #  ifdef PLATFORM_MACOSX
 #    error Do not define PLATFORM_MACOSX for new builds. It is for the old Carbonized build.

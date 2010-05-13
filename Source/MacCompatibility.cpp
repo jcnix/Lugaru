@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /**> HEADER FILES <**/
 #include "MacCompatibility.h"
+#include "config.h"
 
 #ifdef WIN32
 #include <windows.h>
