@@ -2695,7 +2695,7 @@ static bool load_png(const char *file_name, TGAImageRec &tex)
     png_init_io(png_ptr, fp);
     png_read_png(png_ptr, info_ptr,
                  PNG_TRANSFORM_STRIP_16 | PNG_TRANSFORM_PACKING,
-                 png_voidp_NULL);
+                 0);
     png_get_IHDR(png_ptr, info_ptr, &width, &height,
                  &bit_depth, &color_type, &interlace_type, NULL, NULL);
 
@@ -2745,7 +2745,7 @@ static bool load_png(const char *file_name, TGAImageRec &tex)
     retval = true;
 
 png_done:
-    png_destroy_read_struct(&png_ptr, &info_ptr, png_infopp_NULL);
+    png_destroy_read_struct(&png_ptr, &info_ptr, 0);
     if (fp)
         fclose(fp);
     return (retval);

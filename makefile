@@ -13,7 +13,7 @@ OPT += -O3 -fno-strict-aliasing -falign-loops=16 -fno-math-errno
 BINDIR := obj
 RUNDIR := Data
 SRCDIR := src
-LIBPNGDIR := libpng-1.2.8
+LIBPNGDIR := libpng-1.4.2
 ZLIBDIR := zlib-1.2.3
 OPENALDIR := OpenAL
 
@@ -188,7 +188,6 @@ UNUSED_SRCS := \
 PNGSRCS := \
     png.c \
     pngerror.c \
-    pnggccrd.c \
     pngget.c \
     pngmem.c \
     pngpread.c \
@@ -198,7 +197,6 @@ PNGSRCS := \
     pngrutil.c \
     pngset.c \
     pngtrans.c \
-    pngvcrd.c \
     pngwio.c \
     pngwrite.c \
     pngwtran.c \
