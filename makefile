@@ -13,8 +13,6 @@ OPT += -O3 -fno-strict-aliasing -falign-loops=16 -fno-math-errno
 BINDIR := obj
 RUNDIR := Data
 SRCDIR := src
-LIBPNGDIR := libpng-1.4.2
-ZLIBDIR := zlib-1.2.3
 OPENALDIR := OpenAL
 
 ifeq ($(strip $(macosx)),true)
@@ -100,7 +98,7 @@ else
 	LD := g++
 
   	CFLAGS += -DPLATFORM_LINUX=1
-  	LDFLAGS += -lSDL -ljpeg -lGL -lGLU -logg -lvorbis -lvorbisenc -lvorbisfile
+  	LDFLAGS += -lSDL -ljpeg -lGL -lGLU -logg -lvorbis -lvorbisenc -lvorbisfile -lpng -lz
 
   	ifeq ($(strip $(use_devil)),true)
     	LDFLAGS += ./libIL.so.1 ./libILU.so.1 ./libILUT.so.1
@@ -129,7 +127,7 @@ ifeq ($(strip $(use_devil)),true)
     INCLUDES += -I$(SRCDIR)/devil/include
 else
     DEFINES += -DZ_PREFIX=1
-    INCLUDES += -I$(ZLIBDIR) -I$(LIBPNGDIR) -I/usr/include
+    INCLUDES += -I/usr/include
 endif
 
 ifeq ($(strip $(use_fmod)),false)
@@ -179,47 +177,6 @@ SRCS := \
 
 SRCS := $(foreach f,$(SRCS),$(SRCDIR)/$(f))
 
-
-PNGSRCS := \
-    png.c \
-    pngerror.c \
-    pngget.c \
-    pngmem.c \
-    pngpread.c \
-    pngread.c \
-    pngrio.c \
-    pngrtran.c \
-    pngrutil.c \
-    pngset.c \
-    pngtrans.c \
-    pngwio.c \
-    pngwrite.c \
-    pngwtran.c \
-    pngwutil.c \
-
-PNGSRCS := $(foreach f,$(PNGSRCS),$(LIBPNGDIR)/$(f))
-
-
-ZLIBSRCS = \
-	adler32.c \
-	compress.c \
-	crc32.c \
-	deflate.c \
-	gzio.c \
-	infback.c \
-	inffast.c \
-	inflate.c \
-	inftrees.c \
-	trees.c \
-	uncompr.c \
-	zutil.c \
-
-ZLIBSRCS := $(foreach f,$(ZLIBSRCS),$(ZLIBDIR)/$(f))
-
-
-ifeq ($(strip $(use_devil)),false)
-    SRCS += $(PNGSRCS) $(ZLIBSRCS)
-endif
 
 OBJS := $(SRCS:.CC=.o)
 OBJS := $(OBJS:.cc=.o)
