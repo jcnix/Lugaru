@@ -2747,11 +2747,7 @@ static bool load_png(const char *file_name, TGAImageRec &tex)
     retval = true;
 
 png_done:
-<<<<<<< HEAD:Source/OpenGL_Windows.cpp
     png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-=======
-    png_destroy_read_struct(&png_ptr, &info_ptr, 0);
->>>>>>> FETCH_HEAD:src/OpenGL_Windows.cpp
     if (fp)
         fclose(fp);
     return (retval);

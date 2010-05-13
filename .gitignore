@@ -1,6 +1,7 @@
 Data
 bin/*.o
 bin/lugaru
+bin/.deps
 run
 Xcode/build
 Xcode/*.xcodeproj/*.mode1v3
@@ -10,6 +11,7 @@ Makefile.in
 src/config.h
 src/config.h.in
 src/config.h.in~
+stamp-h1
 src/stamp-h1
 aclocal.m4
 autom4te.cache/
