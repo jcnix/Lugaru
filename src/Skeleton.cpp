@@ -327,7 +327,7 @@ float Skeleton::DoConstraints(XYZ *coords,float *scale)
 			joints[jointlabels[head]].velocity=joints[jointlabels[head]].oldvelocity;
 			}
 			if(findLengthfast(&bounceness)>4000&&breaking){
-			objects.model[k].MakeDecal(breakdecal,DoRotation(temp-objects.position[k],0,-objects.rotation[k],0),.4,.5,Random()%360);
+			objects.model[k].MakeDecal(breakdecal,DoRotation(temp-objects.position[k],0,-objects.rotation[k],0),.4,.5,rand()%360);
 			sprites.MakeSprite(cloudsprite, headpos*(*scale)+*coords,joints[jointlabels[head]].velocity*.06, 1,1,1, 4, .2);
 			breaking=0;
 			camerashake+=.6;
@@ -464,7 +464,7 @@ float Skeleton::DoConstraints(XYZ *coords,float *scale)
 
 						if(tutoriallevel!=1||id==0)
 							if(findLengthfast(&bounceness)>8000&&breaking){
-								objects.model[k].MakeDecal(breakdecal,DoRotation(temp-objects.position[k],0,-objects.rotation[k],0),.4,.5,Random()%360);
+								objects.model[k].MakeDecal(breakdecal,DoRotation(temp-objects.position[k],0,-objects.rotation[k],0),.4,.5,rand()%360);
 								sprites.MakeSprite(cloudsprite, joints[i].position*(*scale)+*coords,joints[i].velocity*.06, 1,1,1, 4, .2);
 								//sprites.MakeSprite(cloudsprite, joints[i].position*(*scale)+*coords,joints[i].velocity*.06, 1,1,1, 1, .2);
 								breaking=0;
@@ -583,7 +583,7 @@ float Skeleton::DoConstraints(XYZ *coords,float *scale)
 										}
 										if(tutoriallevel!=1||id==0)
 											if(findLengthfast(&bounceness)>4000&&breaking){
-												objects.model[k].MakeDecal(breakdecal,DoRotation(temp-objects.position[k],0,-objects.rotation[k],0),.4,.5,Random()%360);
+												objects.model[k].MakeDecal(breakdecal,DoRotation(temp-objects.position[k],0,-objects.rotation[k],0),.4,.5,rand()%360);
 												sprites.MakeSprite(cloudsprite, joints[i].position*(*scale)+*coords,joints[i].velocity*.06, 1,1,1, 4, .2);
 												breaking=0;
 												camerashake+=.6;
@@ -615,15 +615,15 @@ float Skeleton::DoConstraints(XYZ *coords,float *scale)
 												if(environment==snowyenvironment)howmany=findLength(&joints[i].velocity)*1/10;
 												if(environment!=desertenvironment)
 												for(j=0;j<howmany;j++){
-												tempvel.x=float(abs(Random()%100)-50)/20;
-												tempvel.y=float(abs(Random()%100)-50)/20;
-												tempvel.z=float(abs(Random()%100)-50)/20;
+												tempvel.x=float(abs(rand()%100)-50)/20;
+												tempvel.y=float(abs(rand()%100)-50)/20;
+												tempvel.z=float(abs(rand()%100)-50)/20;
 												pos=objects.position[k];
 												pos.y+=objects.scale[k]*15;
-												pos.x+=float(abs(Random()%100)-50)/100*objects.scale[k]*5;
-												pos.y+=float(abs(Random()%100)-50)/100*objects.scale[k]*15;
-												pos.z+=float(abs(Random()%100)-50)/100*objects.scale[k]*5;
-												sprites.MakeSprite(splintersprite, pos,tempvel*.5, 165/255+float(abs(Random()%100)-50)/400,0,0, .2+float(abs(Random()%100)-50)/1300, 1);
+												pos.x+=float(abs(rand()%100)-50)/100*objects.scale[k]*5;
+												pos.y+=float(abs(rand()%100)-50)/100*objects.scale[k]*15;
+												pos.z+=float(abs(rand()%100)-50)/100*objects.scale[k]*5;
+												sprites.MakeSprite(splintersprite, pos,tempvel*.5, 165/255+float(abs(rand()%100)-50)/400,0,0, .2+float(abs(rand()%100)-50)/1300, 1);
 												sprites.special[sprites.numsprites-1]=1;
 												}*/
 												objects.rotx[k]+=joints[i].velocity.x*multiplier*.4;

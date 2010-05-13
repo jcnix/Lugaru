@@ -22,7 +22,6 @@ lugaru_SOURCES = \
 	../src/Person.cpp \
 	../src/private.c \
 	../src/Quaternions.cpp \
-	../src/Random.c \
 	../src/Skeleton.cpp \
 	../src/Skybox.cpp \
 	../src/Sprites.cpp \

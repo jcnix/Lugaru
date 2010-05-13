@@ -319,7 +319,7 @@ void Sprites::Draw()
 								end=position[i];
 								if(!spritehit)
 									if(objects.model[k].LineCheck(&start,&end,&colpoint,&objects.position[k],&objects.rotation[k])!=-1){
-										if(detail==2||(detail==1&&abs(Random()%4)==0)||(detail==0&&abs(Random()%8)==0))objects.model[k].MakeDecal(blooddecalfast,DoRotation(colpoint-objects.position[k],0,-objects.rotation[k],0),size[i]*1.6/*+abs((float)(Random()%100))/2400*/,.5,Random()%360);
+										if(detail==2||(detail==1&&abs(rand()%4)==0)||(detail==0&&abs(rand()%8)==0))objects.model[k].MakeDecal(blooddecalfast,DoRotation(colpoint-objects.position[k],0,-objects.rotation[k],0),size[i]*1.6/*+abs((float)(rand()%100))/2400*/,.5,rand()%360);
 										DeleteSprite(i);
 										spritehit=1;
 									}	
@@ -327,7 +327,7 @@ void Sprites::Draw()
 					}
 					if(!spritehit)
 						if(position[i].y<terrain.getHeight(position[i].x,position[i].z)){
-							terrain.MakeDecal(blooddecalfast,position[i],size[i]*1.6/*+abs((float)(Random()%100))/2400*/,.6,Random()%360);
+							terrain.MakeDecal(blooddecalfast,position[i],size[i]*1.6/*+abs((float)(rand()%100))/2400*/,.6,rand()%360);
 							DeleteSprite(i);
 						}
 			}
@@ -342,7 +342,7 @@ void Sprites::Draw()
 			rotation[i]+=multiplier*rotatespeed[i];
 			opacity[i]-=multiplier*5/4;
 			if(type[i]!=weaponshinesprite&&type[i]!=bloodflamesprite)
-				if(opacity[i]<.5&&opacity[i]+multiplier*5/4>=.5&&(abs(Random()%4)==0||(initialsize[i]>2&&Random()%2==0)))MakeSprite(smoketype, position[i],velocity[i], .9,.9,.6, size[i]*1.2, .4);
+				if(opacity[i]<.5&&opacity[i]+multiplier*5/4>=.5&&(abs(rand()%4)==0||(initialsize[i]>2&&rand()%2==0)))MakeSprite(smoketype, position[i],velocity[i], .9,.9,.6, size[i]*1.2, .4);
 			if(alivetime[i]>.14&&(type[i]==flamesprite)){
 				velocity[i]=0;
 				velocity[i].y=1.5;
@@ -410,8 +410,8 @@ void Sprites::MakeSprite(int atype, XYZ where, XYZ avelocity, float red, float g
 			color[numsprites][0]=red;
 			color[numsprites][1]=green;
 			color[numsprites][2]=blue;
-			rotatespeed[numsprites]=abs(Random()%720)-360;
-			speed[numsprites]=float(abs(Random()%100))/200+1.5;
+			rotatespeed[numsprites]=abs(rand()%720)-360;
+			speed[numsprites]=float(abs(rand()%100))/200+1.5;
 		}		
 		numsprites++;
 	}

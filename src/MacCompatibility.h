@@ -61,9 +61,6 @@ typedef signed char SInt8;
 typedef unsigned int UInt32;
 
 
-#include "Random.h"
-
-
 void CopyCStringToPascal( const char* src, unsigned char dst[256]);
 void CopyPascalStringToC( const unsigned char* src, char* dst);
 

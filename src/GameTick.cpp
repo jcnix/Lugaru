@@ -504,7 +504,7 @@ int Game::findPathDist(int start,int end){
 									if(pathpointconnect[last][k]==j)connected=1;
 								}
 								if(connected)
-									if(closest==-1||Random()%2==0){
+									if(closest==-1||rand()%2==0){
 										closest=j;
 									}
 				}
@@ -1359,7 +1359,7 @@ void 	Game::Loadlevel(char *name){
 			if(i==0||player[i].scale<0)player[i].scale=.2;
 			player[i].skeleton.free=0;
 			player[i].skeleton.id=i;
-			//if(Random()%2==0)player[i].creature=wolftype;
+			//if(rand()%2==0)player[i].creature=wolftype;
 			//else player[i].creature=rabbittype;
 			if(i==0&&mapvers<9)player[i].creature=rabbittype;
 			if(player[i].creature!=wolftype)player[i].skeleton.Load((char *)":Data:Skeleton:Basic Figure",(char *)":Data:Skeleton:Basic Figurelow",(char *)":Data:Skeleton:Rabbitbelt",(char *)":Data:Models:Body.solid",(char *)":Data:Models:Body2.solid",(char *)":Data:Models:Body3.solid",(char *)":Data:Models:Body4.solid",(char *)":Data:Models:Body5.solid",(char *)":Data:Models:Body6.solid",(char *)":Data:Models:Body7.solid",(char *)":Data:Models:Bodylow.solid",(char *)":Data:Models:Belt.solid",0);
@@ -1415,7 +1415,7 @@ void 	Game::Loadlevel(char *name){
 			}
 			if(player[i].creature==wolftype)
 			{
-				//k=abs(Random()%3);
+				//k=abs(rand()%3);
 				if(player[i].whichskin==0){
 					LoadTextureSave(":Data:Textures:Wolf.jpg",&player[i].skeleton.drawmodel.textureptr,1,&player[i].skeleton.skinText[0],&player[i].skeleton.skinsize);
 				}
@@ -1444,7 +1444,7 @@ void 	Game::Loadlevel(char *name){
 			player[i].currentframe=0;
 			player[i].targetframe=1;
 			player[i].target=0;
-			player[i].speed=1+(float)(Random()%100)/1000;
+			player[i].speed=1+(float)(rand()%100)/1000;
 			if(difficulty==0)player[i].speed-=.2;
 			if(difficulty==1)player[i].speed-=.1;
 
@@ -5930,9 +5930,9 @@ void 	Game::Tick()
 							//if(hotspottype[i]<=10)
 							while(hotspotvisual[i]<0){
 								hotspotsprite=0;
-								hotspotsprite.x=float(abs(Random()%100000))/100000*hotspotsize[i];
-								hotspotsprite=DoRotation(hotspotsprite,0,0,Random()%360);
-								hotspotsprite=DoRotation(hotspotsprite,0,Random()%360,0);
+								hotspotsprite.x=float(abs(rand()%100000))/100000*hotspotsize[i];
+								hotspotsprite=DoRotation(hotspotsprite,0,0,rand()%360);
+								hotspotsprite=DoRotation(hotspotsprite,0,rand()%360,0);
 								hotspotsprite+=hotspot[i];
 								sprites.MakeSprite(breathsprite, hotspotsprite, hotspotsprite*0, 1,0.5,0, 7, 0.4);
 								hotspotvisual[i]+=0.1/hotspotsize[i]/hotspotsize[i]/hotspotsize[i];
@@ -6022,12 +6022,12 @@ void 	Game::Tick()
 							FSOUND_SetPaused(channels[fireendsound], FALSE);
 
 							for(i=0;i<player[1].skeleton.num_joints;i++){
-								if(Random()%2==0){
+								if(rand()%2==0){
 									if(!player[1].skeleton.free)temp2=(player[1].coords-player[1].oldcoords)/multiplier/2;//velocity/2;
 									if(player[1].skeleton.free)temp2=player[1].skeleton.joints[i].velocity*player[1].scale/2;
 									if(!player[1].skeleton.free)temp=DoRotation(DoRotation(DoRotation(player[1].skeleton.joints[i].position,0,0,player[1].tilt),player[1].tilt2,0,0),0,player[1].rotation,0)*player[1].scale+player[1].coords;
 									if(player[1].skeleton.free)temp=player[1].skeleton.joints[i].position*player[1].scale+player[1].coords;
-									sprites.MakeSprite(breathsprite, temp,temp2, 1,1,1, .6+(float)abs(Random()%100)/200-.25, 1);
+									sprites.MakeSprite(breathsprite, temp,temp2, 1,1,1, .6+(float)abs(rand()%100)/200-.25, 1);
 								}
 							}
 
@@ -6311,12 +6311,12 @@ void 	Game::Tick()
 							FSOUND_SetPaused(channels[fireendsound], FALSE);
 
 							for(i=0;i<player[1].skeleton.num_joints;i++){
-								if(Random()%2==0){
+								if(rand()%2==0){
 									if(!player[1].skeleton.free)temp2=(player[1].coords-player[1].oldcoords)/multiplier/2;//velocity/2;
 									if(player[1].skeleton.free)temp2=player[1].skeleton.joints[i].velocity*player[1].scale/2;
 									if(!player[1].skeleton.free)temp=DoRotation(DoRotation(DoRotation(player[1].skeleton.joints[i].position,0,0,player[1].tilt),player[1].tilt2,0,0),0,player[1].rotation,0)*player[1].scale+player[1].coords;
 									if(player[1].skeleton.free)temp=player[1].skeleton.joints[i].position*player[1].scale+player[1].coords;
-									sprites.MakeSprite(breathsprite, temp,temp2, 1,1,1, .6+(float)abs(Random()%100)/200-.25, 1);
+									sprites.MakeSprite(breathsprite, temp,temp2, 1,1,1, .6+(float)abs(rand()%100)/200-.25, 1);
 								}
 							}
 
@@ -6502,9 +6502,9 @@ void 	Game::Tick()
 
 								footvel=0;
 								footpoint=viewer+viewerfacing*6;
-								footpoint.y+=((float)abs(Random()%1200))/100-6;
-								footpoint.x+=((float)abs(Random()%1200))/100-6;
-								footpoint.z+=((float)abs(Random()%1200))/100-6;
+								footpoint.y+=((float)abs(rand()%1200))/100-6;
+								footpoint.x+=((float)abs(rand()%1200))/100-6;
+								footpoint.z+=((float)abs(rand()%1200))/100-6;
 								sprites.MakeSprite(snowsprite, footpoint,footvel, 1,1,1, .1, 1);
 							}
 						}
@@ -7330,7 +7330,7 @@ void 	Game::Tick()
 							FSOUND_SetVolume(channels[hawksound], 128);
 							FSOUND_SetPaused(channels[hawksound], FALSE);
 
-							hawkcalldelay=16+abs(Random()%8);
+							hawkcalldelay=16+abs(rand()%8);
 						}
 						static float temptexdetail;
 
@@ -7343,7 +7343,7 @@ void 	Game::Tick()
 							player[0].superpermanentdamage=0;
 							/*
 							int whichchar;
-							whichchar = abs(Random()%7);
+							whichchar = abs(rand()%7);
 							registrationname[whichchar]+=1;
 							*/
 						}
@@ -7532,7 +7532,7 @@ void 	Game::Tick()
 										}
 									}
 									if(player[closest].creature==wolftype){
-										k=abs(Random()%3);
+										k=abs(rand()%3);
 										if(player[closest].whichskin==0){
 											LoadTextureSave(":Data:Textures:Wolf.jpg",&player[closest].skeleton.drawmodel.textureptr,1,&player[closest].skeleton.skinText[0],&player[closest].skeleton.skinsize);
 										}
@@ -7675,9 +7675,9 @@ void 	Game::Tick()
 										if(player[closest].skeleton.free)flatvelocity2=player[closest].skeleton.joints[i].velocity;
 										if(!player[closest].skeleton.free)flatfacing2=DoRotation(DoRotation(DoRotation(player[closest].skeleton.joints[i].position,0,0,player[closest].tilt),player[closest].tilt2,0,0),0,player[closest].rotation,0)*player[closest].scale+player[closest].coords;
 										if(player[closest].skeleton.free)flatfacing2=player[closest].skeleton.joints[i].position*player[closest].scale+player[closest].coords;
-										flatvelocity2.x+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.y+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.z+=(float)(abs(Random()%100)-50)/10;
+										flatvelocity2.x+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.y+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.z+=(float)(abs(rand()%100)-50)/10;
 										headspurtdirection=player[closest].skeleton.joints[player[closest].skeleton.jointlabels[head]].position-player[closest].skeleton.joints[player[closest].skeleton.jointlabels[neck]].position;
 										Normalise(&headspurtdirection);
 										sprites.MakeSprite(bloodflamesprite, flatfacing2,flatvelocity2, 1,1,1, .6, 1);
@@ -7758,9 +7758,9 @@ void 	Game::Tick()
 										if(player[closest].skeleton.free)flatvelocity2=player[closest].skeleton.joints[i].velocity;
 										if(!player[closest].skeleton.free)flatfacing2=DoRotation(DoRotation(DoRotation(player[closest].skeleton.joints[i].position,0,0,player[closest].tilt),player[closest].tilt2,0,0),0,player[closest].rotation,0)*player[closest].scale+player[closest].coords;
 										if(player[closest].skeleton.free)flatfacing2=player[closest].skeleton.joints[i].position*player[closest].scale+player[closest].coords;
-										flatvelocity2.x+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.y+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.z+=(float)(abs(Random()%100)-50)/10;
+										flatvelocity2.x+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.y+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.z+=(float)(abs(rand()%100)-50)/10;
 										sprites.MakeSprite(bloodflamesprite, flatfacing2,flatvelocity2, 1,1,1, 3, 1);
 										sprites.MakeSprite(bloodsprite, flatfacing2,flatvelocity2, 1,1,1, .3, 1);
 										sprites.MakeSprite(cloudsprite, flatfacing2,flatvelocity2*0, .6,0,0, 1, .5);
@@ -7771,9 +7771,9 @@ void 	Game::Tick()
 										if(player[closest].skeleton.free)flatvelocity2=player[closest].skeleton.joints[i].velocity;
 										if(!player[closest].skeleton.free)flatfacing2=DoRotation(DoRotation(DoRotation(player[closest].skeleton.joints[i].position,0,0,player[closest].tilt),player[closest].tilt2,0,0),0,player[closest].rotation,0)*player[closest].scale+player[closest].coords;
 										if(player[closest].skeleton.free)flatfacing2=player[closest].skeleton.joints[i].position*player[closest].scale+player[closest].coords;
-										flatvelocity2.x+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.y+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.z+=(float)(abs(Random()%100)-50)/10;
+										flatvelocity2.x+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.y+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.z+=(float)(abs(rand()%100)-50)/10;
 										sprites.MakeSprite(bloodflamesprite, flatfacing2,flatvelocity2, 1,1,1, 3, 1);
 										sprites.MakeSprite(bloodsprite, flatfacing2,flatvelocity2, 1,1,1, .4, 1);
 									}
@@ -7783,9 +7783,9 @@ void 	Game::Tick()
 										if(player[closest].skeleton.free)flatvelocity2=player[closest].skeleton.joints[i].velocity;
 										if(!player[closest].skeleton.free)flatfacing2=DoRotation(DoRotation(DoRotation(player[closest].skeleton.joints[i].position,0,0,player[closest].tilt),player[closest].tilt2,0,0),0,player[closest].rotation,0)*player[closest].scale+player[closest].coords;
 										if(player[closest].skeleton.free)flatfacing2=player[closest].skeleton.joints[i].position*player[closest].scale+player[closest].coords;
-										flatvelocity2.x+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.y+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.z+=(float)(abs(Random()%100)-50)/10;
+										flatvelocity2.x+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.y+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.z+=(float)(abs(rand()%100)-50)/10;
 										sprites.MakeSprite(bloodflamesprite, flatfacing2,flatvelocity2*2, 1,1,1, 3, 1);
 										sprites.MakeSprite(bloodsprite, flatfacing2,flatvelocity2*2, 1,1,1, .4, 1);
 									}
@@ -7795,9 +7795,9 @@ void 	Game::Tick()
 										if(player[closest].skeleton.free)flatvelocity2=player[closest].skeleton.joints[i].velocity;
 										if(!player[closest].skeleton.free)flatfacing2=DoRotation(DoRotation(DoRotation(player[closest].skeleton.joints[i].position,0,0,player[closest].tilt),player[closest].tilt2,0,0),0,player[closest].rotation,0)*player[closest].scale+player[closest].coords;
 										if(player[closest].skeleton.free)flatfacing2=player[closest].skeleton.joints[i].position*player[closest].scale+player[closest].coords;
-										flatvelocity2.x+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.y+=(float)(abs(Random()%100)-50)/10;
-										flatvelocity2.z+=(float)(abs(Random()%100)-50)/10;
+										flatvelocity2.x+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.y+=(float)(abs(rand()%100)-50)/10;
+										flatvelocity2.z+=(float)(abs(rand()%100)-50)/10;
 										sprites.MakeSprite(bloodflamesprite, flatfacing2,flatvelocity2*2, 1,1,1, 3, 1);
 										sprites.MakeSprite(bloodsprite, flatfacing2,flatvelocity2*2, 1,1,1, .4, 1);
 									}
@@ -7975,16 +7975,16 @@ void 	Game::Tick()
 								boxcoords.y=player[0].coords.y-3;
 								if(editortype==bushtype)boxcoords.y=player[0].coords.y-.5;
 								if(editortype==firetype)boxcoords.y=player[0].coords.y-.5;
-								//objects.MakeObject(abs(Random()%3),boxcoords,Random()%360);
+								//objects.MakeObject(abs(rand()%3),boxcoords,rand()%360);
 								float temprotat,temprotat2;
 								temprotat=editorrotation;
 								temprotat2=editorrotation2;
-								if(temprotat<0||editortype==bushtype)temprotat=Random()%360;
-								if(temprotat2<0)temprotat2=Random()%360;
+								if(temprotat<0||editortype==bushtype)temprotat=rand()%360;
+								if(temprotat2<0)temprotat2=rand()%360;
 
 								objects.MakeObject(editortype,boxcoords,(int)temprotat-((int)temprotat)%30,(int)temprotat2,editorsize);
 								if(editortype==treetrunktype)
-									objects.MakeObject(treeleavestype,boxcoords,Random()%360*(temprotat2<2)+(int)editorrotation-((int)editorrotation)%30,editorrotation2,editorsize);
+									objects.MakeObject(treeleavestype,boxcoords,rand()%360*(temprotat2<2)+(int)editorrotation-((int)editorrotation)%30,editorrotation2,editorsize);
 							}
 
 							drawmodetogglekeydown=1;
@@ -8002,7 +8002,7 @@ void 	Game::Tick()
 								//if(!player[numplayers].loaded)player[numplayers].skeleton.skinText = new GLubyte[texsize];
 								//player[numplayers].skeleton.skinText.resize(texsize);
 
-								k=abs(Random()%2)+1;
+								k=abs(rand()%2)+1;
 								if(k==0){
 									LoadTextureSave(":Data:Textures:Fur3.jpg",&player[numplayers].skeleton.drawmodel.textureptr,1,&player[numplayers].skeleton.skinText[0],&player[numplayers].skeleton.skinsize);
 									player[numplayers].whichskin=0;
@@ -8025,7 +8025,7 @@ void 	Game::Tick()
 								player[numplayers].targetframe=1;
 								player[numplayers].target=0;
 								player[numplayers].bled=0;
-								player[numplayers].speed=1+(float)(Random()%100)/1000;
+								player[numplayers].speed=1+(float)(rand()%100)/1000;
 
 								player[numplayers].targetrotation=player[0].targetrotation;
 								player[numplayers].rotation=player[0].rotation;
@@ -8438,8 +8438,8 @@ void 	Game::Tick()
 														}
 														else {
 															if(findDistancefast(&player[k].coords,&player[i].coords)<4.5*(player[k].scale*5)*(player[k].scale*5)){
-																if(player[k].weaponactive==-1)randattack=abs(Random()%5);
-																else randattack=abs(Random()%5);
+																if(player[k].weaponactive==-1)randattack=abs(rand()%5);
+																else randattack=abs(rand()%5);
 																if(player[k].weaponactive==-1&&findDistancefast(&player[k].coords,&player[i].coords)<2.5*(player[k].scale*5)*(player[k].scale*5)){
 																	if(randattack==0&&animation[player[i].targetanimation].height!=lowheight)player[k].targetanimation=sweepanim;
 																	else if(randattack==1&&animation[player[i].targetanimation].height!=lowheight&&player[k].weaponactive==-1)player[k].targetanimation=upunchanim;
@@ -8626,7 +8626,7 @@ void 	Game::Tick()
 																if(rotatetarget.z<0)player[k].targetrotation=180-player[k].targetrotation;
 
 																if(player[k].targetanimation==crouchstabanim||player[k].targetanimation==swordgroundstabanim){
-																	player[k].targetrotation+=(float)(abs(Random()%100)-50)/4;
+																	player[k].targetrotation+=(float)(abs(rand()%100)-50)/4;
 																}
 
 																player[k].targettilt2=-asin(rotatetarget.y)*360/6.28;//*-70;
@@ -9334,7 +9334,7 @@ void 	Game::Tick()
 													player[i].losupdatedelay=.2;
 													for(j=0;j<numplayers;j++){
 														if(j==0||player[j].skeleton.free||player[j].aitype!=passivetype){
-															if(abs(Random()%2)||animation[player[j].targetanimation].height!=lowheight||j!=0)
+															if(abs(rand()%2)||animation[player[j].targetanimation].height!=lowheight||j!=0)
 																if(findDistancefast(&player[i].coords,&player[j].coords)<400)
 																	if(normaldotproduct(player[i].facing,player[j].coords-player[i].coords)>0)
 																		if(player[j].coords.y<player[i].coords.y+5||player[j].onterrain)
@@ -9474,7 +9474,7 @@ void 	Game::Tick()
 													player[i].losupdatedelay=.2;
 													for(j=0;j<numplayers;j++){
 														if(j==0||player[j].skeleton.free||player[j].aitype!=passivetype){
-															if(abs(Random()%2)||animation[player[j].targetanimation].height!=lowheight||j!=0)
+															if(abs(rand()%2)||animation[player[j].targetanimation].height!=lowheight||j!=0)
 																if(findDistancefast(&player[i].coords,&player[j].coords)<400)
 																	if(normaldotproduct(player[i].facing,player[j].coords-player[i].coords)>0)
 																		if((-1==checkcollide(DoRotation(player[i].skeleton.joints[player[i].skeleton.jointlabels[head]].position,0,player[i].rotation,0)*player[i].scale+player[i].coords,DoRotation(player[j].skeleton.joints[player[j].skeleton.jointlabels[head]].position,0,player[j].rotation,0)*player[j].scale+player[j].coords)&&!player[j].isWallJump())||(player[j].targetanimation==hanganim&&normaldotproduct(player[j].facing,player[i].coords-player[j].coords)<0)){
@@ -9552,8 +9552,8 @@ void 	Game::Tick()
 												if(findDistancefastflat(&player[i].coords,&player[i].lastseen)<1*(player[i].scale*5)*(player[i].scale*5)||player[i].lastchecktime<0){
 													player[i].forwardkeydown=0;
 													player[i].aiupdatedelay=1;
-													player[i].lastseen.x+=(float(Random()%100)-50)/25;
-													player[i].lastseen.z+=(float(Random()%100)-50)/25;
+													player[i].lastseen.x+=(float(rand()%100)-50)/25;
+													player[i].lastseen.z+=(float(rand()%100)-50)/25;
 													player[i].lastchecktime=3;
 												}
 
@@ -9593,7 +9593,7 @@ void 	Game::Tick()
 													if(findDistancefast(&player[i].coords,&player[0].coords)<4&&animation[player[i].targetanimation].height!=lowheight)
 													{player[i].aitype=attacktypecutoff;
 													player[i].lastseentime=1;}
-													if(abs(Random()%2)||animation[player[i].targetanimation].height!=lowheight)
+													if(abs(rand()%2)||animation[player[i].targetanimation].height!=lowheight)
 														if(findDistancefast(&player[i].coords,&player[0].coords)<400)
 															if(normaldotproduct(player[i].facing,player[0].coords-player[i].coords)>0)
 																if((-1==checkcollide(DoRotation(player[i].skeleton.joints[player[i].skeleton.jointlabels[head]].position,0,player[i].rotation,0)*player[i].scale+player[i].coords,DoRotation(player[0].skeleton.joints[player[0].skeleton.jointlabels[head]].position,0,player[0].rotation,0)*player[0].scale+player[0].coords))||(player[j].targetanimation==hanganim&&normaldotproduct(player[j].facing,player[i].coords-player[j].coords)<0)){
@@ -9776,7 +9776,7 @@ void 	Game::Tick()
 																}
 															}
 															/*if(findDistancefast(&player[i].coords,&weapons.position[player[i].ally])<3){
-															if(abs(Random()%6)){
+															if(abs(rand()%6)){
 															player[i].crouchkeydown=1;
 															if(!findDistancefast(&player[i].coords,&weapons.position[player[i].ally])<1){
 															if(player[i].isRun()){
@@ -9814,11 +9814,11 @@ void 	Game::Tick()
 													if(player[0].targetanimation!=rabbitkickanim&&player[0].weaponactive!=-1){
 														if(weapons.type[player[0].weaponids[0]]==knife){
 															if(player[i].isIdle()||player[i].isCrouch()||player[i].isRun()||player[i].isFlip()){
-																if(abs(Random()%2==0))player[i].targetanimation=backhandspringanim;
+																if(abs(rand()%2==0))player[i].targetanimation=backhandspringanim;
 																else player[i].targetanimation=rollanim;
 																player[i].target=0;
 																player[i].targetframe=0;
-																player[i].targetrotation+=90*(abs(Random()%2)*2-1);
+																player[i].targetrotation+=90*(abs(rand()%2)*2-1);
 																player[i].wentforweapon=0;
 															}
 															if(player[i].targetanimation==jumpupanim||player[i].targetanimation==jumpdownanim){
@@ -9891,9 +9891,9 @@ void 	Game::Tick()
 																player[i].lastpathfindpoint4=-1;
 															}	
 															if(player[i].aiupdatedelay<0&&!animation[player[i].targetanimation].attack&&player[i].targetanimation!=staggerbackhighanim&&player[i].targetanimation!=staggerbackhardanim&&player[i].targetanimation!=backhandspringanim&&player[i].targetanimation!=dodgebackanim){
-																if(player[i].weaponactive==-1&&player[i].num_weapons>0)player[i].drawkeydown=Random()%2;
+																if(player[i].weaponactive==-1&&player[i].num_weapons>0)player[i].drawkeydown=rand()%2;
 																else player[i].drawkeydown=0;
-																player[i].rabbitkickenabled=Random()%2;
+																player[i].rabbitkickenabled=rand()%2;
 																rotatetarget=player[player[i].aitarget].coords+player[player[i].aitarget].velocity;
 																if(findDistancefast(&player[player[i].aitarget].coords,&player[i].coords)<findDistancefast(&rotatetarget,&player[i].coords))
 																	rotatetarget=player[player[i].aitarget].coords+player[player[i].aitarget].velocity*findDistance(&player[player[i].aitarget].coords,&player[i].coords)/findLength(&player[i].velocity)-player[i].coords;
@@ -9903,17 +9903,17 @@ void 	Game::Tick()
 																player[i].targetrotation*=360/6.28;
 																if(rotatetarget.z<0)player[i].targetrotation=180-player[i].targetrotation;
 																player[i].lookrotation=player[i].targetrotation;
-																player[i].aiupdatedelay=.2+abs((float)(Random()%100)/1000);
+																player[i].aiupdatedelay=.2+abs((float)(rand()%100)/1000);
 
 																oldkey=player[i].forwardkeydown;
 																if(findDistancefast(&player[i].coords,&player[0].coords)>5&&(player[0].weaponactive==-1||player[i].weaponactive!=-1))player[i].forwardkeydown=1;
 																else if((findDistancefast(&player[i].coords,&player[0].coords)>16||findDistancefast(&player[i].coords,&player[0].coords)<9)&&player[0].weaponactive!=-1)player[i].forwardkeydown=1;
-																else if(Random()%6==0||(player[i].creature==wolftype&&Random()%3==0))player[i].forwardkeydown=1;
+																else if(rand()%6==0||(player[i].creature==wolftype&&rand()%3==0))player[i].forwardkeydown=1;
 																else player[i].forwardkeydown=0;
 																if(player[0].dead){
 																	player[i].forwardkeydown=0;
-																	if(Random()%10==0)player[i].forwardkeydown=1;
-																	if(Random()%100==0){
+																	if(rand()%10==0)player[i].forwardkeydown=1;
+																	if(rand()%100==0){
 																		player[i].aitype=pathfindtype;
 																		player[i].finalfinaltarget=player[i].waypoints[player[i].waypoint];
 																		player[i].finalpathfindpoint=-1;
@@ -9936,9 +9936,9 @@ void 	Game::Tick()
 																player[i].crouchkeydown=1;
 																}
 																}*/
-																if(Random()%2==0/*||player[0].weaponactive!=-1*/||player[i].weaponactive!=-1||player[i].creature==wolftype)player[i].attackkeydown=1;
+																if(rand()%2==0/*||player[0].weaponactive!=-1*/||player[i].weaponactive!=-1||player[i].creature==wolftype)player[i].attackkeydown=1;
 																else player[i].attackkeydown=0;
-																if((player[i].isRun())&&Random()%6&&findDistancefast(&player[i].coords,&player[0].coords)>7)player[i].attackkeydown=0;
+																if((player[i].isRun())&&rand()%6&&findDistancefast(&player[i].coords,&player[0].coords)>7)player[i].attackkeydown=0;
 																//if(player[i].attackkeydown&&findDistancefast(&player[i].coords,&player[0].coords)<3&&player[i].targetanimation!=runanim&&!player[0].skeleton.free)player[i].crouchkeydown=1;
 																/*if(player[0].targetanimation==rabbitkickanim&&!player[0].skeleton.free){
 																player[i].attackkeydown=0;
@@ -9950,7 +9950,7 @@ void 	Game::Tick()
 																if(player[i].aitype!=playercontrolled&&(player[i].isIdle()||player[i].isCrouch()||player[i].isRun())){
 																	target=-2;
 																	for(j=0;j<numplayers;j++){
-																		if(j!=i&&!player[j].skeleton.free&&player[j].hasvictim&&((tutoriallevel==1&&reversaltrain)||(Random()%2==0&&difficulty==2)||(Random()%4==0&&difficulty==1)||(Random()%8==0&&difficulty==0)||(player[j].lastattack2==player[j].targetanimation&&player[j].lastattack3==player[j].targetanimation&&(Random()%2==0||difficulty==2))||((player[i].isIdle()||player[i].isRun())&&player[j].weaponactive!=-1)||(player[j].targetanimation==swordslashanim&&player[i].weaponactive!=-1)||player[j].targetanimation==staffhitanim||player[j].targetanimation==staffspinhitanim)){
+																		if(j!=i&&!player[j].skeleton.free&&player[j].hasvictim&&((tutoriallevel==1&&reversaltrain)||(rand()%2==0&&difficulty==2)||(rand()%4==0&&difficulty==1)||(rand()%8==0&&difficulty==0)||(player[j].lastattack2==player[j].targetanimation&&player[j].lastattack3==player[j].targetanimation&&(rand()%2==0||difficulty==2))||((player[i].isIdle()||player[i].isRun())&&player[j].weaponactive!=-1)||(player[j].targetanimation==swordslashanim&&player[i].weaponactive!=-1)||player[j].targetanimation==staffhitanim||player[j].targetanimation==staffspinhitanim)){
 																			if(findDistancefast(&player[j].coords,&player[j].victim->coords)<4&&player[j].victim==&player[i]&&(player[j].targetanimation==sweepanim||player[j].targetanimation==spinkickanim||player[j].targetanimation==staffhitanim||player[j].targetanimation==staffspinhitanim||player[j].targetanimation==winduppunchanim||player[j].targetanimation==upunchanim||player[j].targetanimation==wolfslapanim||player[j].targetanimation==knifeslashstartanim||((player[j].targetanimation==swordslashanim)&&(findDistancefast(&player[j].coords,&player[i].coords)<2||(player[i].weaponactive!=-1))))){
 																				if(target>=0)target=-1;
 																				else target=j;
@@ -10039,11 +10039,11 @@ void 	Game::Tick()
 										}
 										else {
 											if(player[i].interestdelay<=0){
-												player[i].interestdelay=.7+(float)(abs(Random()%100))/100;
+												player[i].interestdelay=.7+(float)(abs(rand()%100))/100;
 												player[i].headtarget=player[i].coords;
-												player[i].headtarget.x+=(float)(abs(Random()%200)-100)/100;
-												player[i].headtarget.z+=(float)(abs(Random()%200)-100)/100;
-												player[i].headtarget.y+=(float)(abs(Random()%200)-100)/300;
+												player[i].headtarget.x+=(float)(abs(rand()%200)-100)/100;
+												player[i].headtarget.z+=(float)(abs(rand()%200)-100)/100;
+												player[i].headtarget.y+=(float)(abs(rand()%200)-100)/300;
 												player[i].headtarget+=player[i].facing*1.5;
 											}
 											rotatetarget=player[i].headtarget-player[i].coords;
@@ -10087,7 +10087,7 @@ void 	Game::Tick()
 									player[i].whichdirectiondelay-=multiplier;
 									if(player[i].avoidcollided<-.3||player[i].whichdirectiondelay<=0){
 										player[i].avoidcollided=-.3;
-										player[i].whichdirection=abs(Random()%2);
+										player[i].whichdirection=abs(rand()%2);
 										player[i].whichdirectiondelay=.4;
 									}
 									if(player[i].avoidcollided>1)player[i].avoidcollided=1;
@@ -10343,7 +10343,7 @@ void 	Game::Tick()
 																					aim=player[i].victim->coords+DoRotation(player[i].victim->skeleton.joints[player[i].victim->skeleton.jointlabels[abdomen]].position,0,player[i].victim->rotation,0)*player[i].victim->scale+player[i].victim->velocity*findDistance(&player[i].victim->coords,&player[i].coords)/50-(player[i].coords+DoRotation(player[i].skeleton.joints[player[i].skeleton.jointlabels[righthand]].position,0,player[i].rotation,0)*player[i].scale);					 	
 																					Normalise(&aim);
 
-																					aim=DoRotation(aim,(float)abs(Random()%30)-15,(float)abs(Random()%30)-15,0);
+																					aim=DoRotation(aim,(float)abs(rand()%30)-15,(float)abs(rand()%30)-15,0);
 
 																					weapons.velocity[player[i].weaponids[0]]=aim*50;
 																					weapons.tipvelocity[player[i].weaponids[0]]=aim*50;
@@ -10914,24 +10914,24 @@ void 	Game::Tick()
 													FSOUND_SetPaused(channels[fireendsound], FALSE);
 
 													for(int i=0;i<player[1].skeleton.num_joints;i++){
-														if(Random()%2==0){
+														if(rand()%2==0){
 															if(!player[1].skeleton.free)temp2=(player[1].coords-player[1].oldcoords)/multiplier/2;//velocity/2;
 															if(player[1].skeleton.free)temp2=player[1].skeleton.joints[i].velocity*player[1].scale/2;
 															if(!player[1].skeleton.free)temp=DoRotation(DoRotation(DoRotation(player[1].skeleton.joints[i].position,0,0,player[1].tilt),player[1].tilt2,0,0),0,player[1].rotation,0)*player[1].scale+player[1].coords;
 															if(player[1].skeleton.free)temp=player[1].skeleton.joints[i].position*player[1].scale+player[1].coords;
-															sprites.MakeSprite(breathsprite, temp,temp2, 1,1,1, .6+(float)abs(Random()%100)/200-.25, 1);
+															sprites.MakeSprite(breathsprite, temp,temp2, 1,1,1, .6+(float)abs(rand()%100)/200-.25, 1);
 														}
 													}
 
 													player[1].coords=(oldtemp+oldtemp2)/2;
 													for(int i=0;i<player[1].skeleton.num_joints;i++){
 														player[1].skeleton.joints[i].velocity=0;
-														if(Random()%2==0){
+														if(rand()%2==0){
 															if(!player[1].skeleton.free)temp2=(player[1].coords-player[1].oldcoords)/multiplier/2;//velocity/2;
 															if(player[1].skeleton.free)temp2=player[1].skeleton.joints[i].velocity*player[1].scale/2;
 															if(!player[1].skeleton.free)temp=DoRotation(DoRotation(DoRotation(player[1].skeleton.joints[i].position,0,0,player[1].tilt),player[1].tilt2,0,0),0,player[1].rotation,0)*player[1].scale+player[1].coords;
 															if(player[1].skeleton.free)temp=player[1].skeleton.joints[i].position*player[1].scale+player[1].coords;
-															sprites.MakeSprite(breathsprite, temp,temp2, 1,1,1, .6+(float)abs(Random()%100)/200-.25, 1);
+															sprites.MakeSprite(breathsprite, temp,temp2, 1,1,1, .6+(float)abs(rand()%100)/200-.25, 1);
 														}
 													}
 												}
@@ -11662,9 +11662,9 @@ void 	Game::TickOnceAfter(){
 		if(blackout<0)blackout=0;
 		//if(woozy<0)woozy=0;
 		if(camerashake){
-			viewer.x+=(float)(Random()%100)*.0005*camerashake;
-			viewer.y+=(float)(Random()%100)*.0005*camerashake;
-			viewer.z+=(float)(Random()%100)*.0005*camerashake;
+			viewer.x+=(float)(rand()%100)*.0005*camerashake;
+			viewer.y+=(float)(rand()%100)*.0005*camerashake;
+			viewer.z+=(float)(rand()%100)*.0005*camerashake;
 		}
 	}
 }

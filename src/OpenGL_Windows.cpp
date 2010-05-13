@@ -603,7 +603,7 @@ Boolean SetUp (Game & game)
 
 	LOGFUNC;
 
-	randSeed = UpTime().lo;
+	srand (time(NULL));
 
 	osx = 0;
 	ifstream ipstream(ConvertFileName(":Data:config.txt"), std::ios::in /*| std::ios::nocreate*/);

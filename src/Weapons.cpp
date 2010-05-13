@@ -106,16 +106,16 @@ void 	Weapons::DoStuff(){
 			//speed=(tippoint[i]-oldtippoint[i])/multiplier/6;
 			speed=0;
 			/*for(j=0;j<10;j++){
-			tempvel.x=float(abs(Random()%100)-50)/20;
-			tempvel.y=float(abs(Random()%100)-50)/20;
-			tempvel.z=float(abs(Random()%100)-50)/20;
+			tempvel.x=float(abs(rand()%100)-50)/20;
+			tempvel.y=float(abs(rand()%100)-50)/20;
+			tempvel.z=float(abs(rand()%100)-50)/20;
 			tempvel+=speed;
-			sprites.MakeSprite(cloudimpactsprite, position[i]+(tippoint[i]-position[i])*((float)j-2)/8,tempvel*.5, 115/255,73/255,12/255, .15+float(abs(Random()%100)-50)/1000, .7);
+			sprites.MakeSprite(cloudimpactsprite, position[i]+(tippoint[i]-position[i])*((float)j-2)/8,tempvel*.5, 115/255,73/255,12/255, .15+float(abs(rand()%100)-50)/1000, .7);
 			}*/
 			for(j=0;j<40;j++){
-				tempvel.x=float(abs(Random()%100)-50)/20;
-				tempvel.y=float(abs(Random()%100)-50)/20;
-				tempvel.z=float(abs(Random()%100)-50)/20;
+				tempvel.x=float(abs(rand()%100)-50)/20;
+				tempvel.y=float(abs(rand()%100)-50)/20;
+				tempvel.z=float(abs(rand()%100)-50)/20;
 				tempvel+=speed;
 				sprites.MakeSprite(splintersprite, position[i]+(tippoint[i]-position[i])*((float)j-8)/32,tempvel*.5, 115/255,73/255,12/255, .1, 1);
 			}
@@ -153,7 +153,7 @@ void 	Weapons::DoStuff(){
 						whichhit=objects.model[k].LineCheck(&start,&end,&colpoint,&objects.position[k],&objects.rotation[k]);
 						if(whichhit!=-1){
 							if(objects.type[k]==treetrunktype){
-								objects.model[k].MakeDecal(breakdecal,DoRotation(colpoint-objects.position[k],0,-objects.rotation[k],0),.1,1,Random()%360);
+								objects.model[k].MakeDecal(breakdecal,DoRotation(colpoint-objects.position[k],0,-objects.rotation[k],0),.1,1,rand()%360);
 								normalrot=DoRotation(objects.model[k].facenormals[whichhit],0,objects.rotation[k],0);
 								velocity[i]=0;
 								if(type[i]==knife)position[i]=colpoint-normalrot*.1;
@@ -212,9 +212,9 @@ void 	Weapons::DoStuff(){
 						footvel=0;
 						footpoint=DoRotation((player[j].skeleton.joints[player[j].skeleton.jointlabels[abdomen]].position+player[j].skeleton.joints[player[j].skeleton.jointlabels[neck]].position)/2,0,player[j].rotation,0)*player[j].scale+player[j].coords;				
 						if(owner[i]==-1&&findDistancefastflat(&position[i],&player[j].coords)<1.5&&findDistancefast(&position[i],&player[j].coords)<4&&player[j].weaponstuck==-1&&!player[j].skeleton.free&&j!=oldowner[i]){
-							if((player[j].aitype!=attacktypecutoff||abs(Random()%6)==0||(player[j].targetanimation!=backhandspringanim&&player[j].targetanimation!=rollanim&&player[j].targetanimation!=flipanim&&Random()%2==0))&&!missed[i]){
+							if((player[j].aitype!=attacktypecutoff||abs(rand()%6)==0||(player[j].targetanimation!=backhandspringanim&&player[j].targetanimation!=rollanim&&player[j].targetanimation!=flipanim&&rand()%2==0))&&!missed[i]){
 								bool caught=0;
-								if((player[j].creature==wolftype&&Random()%3!=0&&player[j].weaponactive==-1&&(player[j].isIdle()||player[j].isRun()||player[j].targetanimation==walkanim))||(player[j].creature==rabbittype&&Random()%2==0&&player[j].aitype==attacktypecutoff&&player[j].weaponactive==-1)){
+								if((player[j].creature==wolftype&&rand()%3!=0&&player[j].weaponactive==-1&&(player[j].isIdle()||player[j].isRun()||player[j].targetanimation==walkanim))||(player[j].creature==rabbittype&&rand()%2==0&&player[j].aitype==attacktypecutoff&&player[j].weaponactive==-1)){
 									float gLoc[3];
 									float vel[3];
 									gLoc[0]=player[j].coords.x;
@@ -267,7 +267,7 @@ void 	Weapons::DoStuff(){
 										if(player[j].weaponstuckwhere==1)player[j].DoBloodBig(2,200);
 										player[j].damage+=200/player[j].armorhigh;
 										player[j].deathbleeding=1;
-										player[j].bloodloss+=(200+abs((float)(Random()%40))-20)/player[j].armorhigh;
+										player[j].bloodloss+=(200+abs((float)(rand()%40))-20)/player[j].armorhigh;
 										owner[i]=j;
 										bloody[i]=2;
 										blooddrip[i]=5;
@@ -492,10 +492,10 @@ void 	Weapons::DoStuff(){
 								if(findLengthfast(&bounceness)>1){
 									float gLoc[3];
 									float vel[3];
-									//int whichsound=clank1sound+abs(Random()%4);
+									//int whichsound=clank1sound+abs(rand()%4);
 									int whichsound;
-									if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-									if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);gLoc[0]=position[i].x;
+									if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+									if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);gLoc[0]=position[i].x;
 									gLoc[1]=position[i].y;
 									gLoc[2]=position[i].z;
 									vel[0]=0;
@@ -528,10 +528,10 @@ void 	Weapons::DoStuff(){
 								if(findLengthfast(&bounceness)>1){
 									float gLoc[3];
 									float vel[3];
-									//int whichsound=clank1sound+abs(Random()%4);
+									//int whichsound=clank1sound+abs(rand()%4);
 									int whichsound;
-									if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-									if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);gLoc[0]=position[i].x;
+									if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+									if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);gLoc[0]=position[i].x;
 									gLoc[0]=position[i].x;
 									gLoc[1]=position[i].y;
 									gLoc[2]=position[i].z;
@@ -571,10 +571,10 @@ void 	Weapons::DoStuff(){
 										if(findLengthfast(&bounceness)>1){
 											float gLoc[3];
 											float vel[3];
-											//int whichsound=clank1sound+abs(Random()%4);
+											//int whichsound=clank1sound+abs(rand()%4);
 											int whichsound;
-											if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-											if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);gLoc[0]=mid.x;
+											if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+											if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);gLoc[0]=mid.x;
 											gLoc[1]=mid.y;
 											gLoc[2]=mid.z;
 											vel[0]=0;
@@ -612,10 +612,10 @@ void 	Weapons::DoStuff(){
 										if(findLengthfast(&bounceness)>1){
 											float gLoc[3];
 											float vel[3];
-											//int whichsound=clank1sound+abs(Random()%4);
+											//int whichsound=clank1sound+abs(rand()%4);
 											int whichsound;
-											if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-											if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);gLoc[0]=mid.x;
+											if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+											if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);gLoc[0]=mid.x;
 											gLoc[1]=mid.y;
 											gLoc[2]=mid.z;
 											vel[0]=0;
@@ -697,10 +697,10 @@ void 	Weapons::DoStuff(){
 							float vel[3];
 							int whichsound;
 							if(terrain.getOpacity(position[i].x,position[i].z)>.2){
-								if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-								if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);
+								if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+								if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);
 							}
-							else whichsound=footstepsound+abs(Random()%2);
+							else whichsound=footstepsound+abs(rand()%2);
 							gLoc[0]=position[i].x;
 							gLoc[1]=position[i].y;
 							gLoc[2]=position[i].z;
@@ -751,10 +751,10 @@ void 	Weapons::DoStuff(){
 							float vel[3];
 							int whichsound;
 							if(terrain.getOpacity(tippoint[i].x,tippoint[i].z)>.2){
-								if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-								if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);
+								if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+								if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);
 							}
-							else whichsound=footstepsound+abs(Random()%2);
+							else whichsound=footstepsound+abs(rand()%2);
 							gLoc[0]=tippoint[i].x;
 							gLoc[1]=tippoint[i].y;
 							gLoc[2]=tippoint[i].z;
@@ -809,10 +809,10 @@ void 	Weapons::DoStuff(){
 							float vel[3];
 							int whichsound;
 							if(terrain.getOpacity(mid.x,mid.z)>.2){
-								if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-								if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);
+								if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+								if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);
 							}
-							else whichsound=footstepsound+abs(Random()%2);
+							else whichsound=footstepsound+abs(rand()%2);
 							gLoc[0]=mid.x;
 							gLoc[1]=mid.y;
 							gLoc[2]=mid.z;
@@ -853,10 +853,10 @@ void 	Weapons::DoStuff(){
 							float vel[3];
 							int whichsound;
 							if(terrain.getOpacity(mid.x,mid.z)>.2){
-								if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-								if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);
+								if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+								if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);
 							}
-							else whichsound=footstepsound+abs(Random()%2);
+							else whichsound=footstepsound+abs(rand()%2);
 							gLoc[0]=mid.x;
 							gLoc[1]=mid.y;
 							gLoc[2]=mid.z;
@@ -895,10 +895,10 @@ void 	Weapons::DoStuff(){
 					float vel[3];
 					int whichsound;
 					if(terrain.getOpacity(mid.x,mid.z)>.2){
-					if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-					if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);
+					if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+					if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);
 					}
-					else whichsound=footstepsound+abs(Random()%2);
+					else whichsound=footstepsound+abs(rand()%2);
 					gLoc[0]=position[i].x;
 					gLoc[1]=position[i].y;
 					gLoc[2]=position[i].z;
@@ -934,10 +934,10 @@ void 	Weapons::DoStuff(){
 					float vel[3];
 					int whichsound;
 					if(terrain.getOpacity(mid.x,mid.z)>.2){
-					if(type[i]==staff)whichsound=footstepsound3+abs(Random()%2);
-					if(type[i]!=staff)whichsound=clank1sound+abs(Random()%4);
+					if(type[i]==staff)whichsound=footstepsound3+abs(rand()%2);
+					if(type[i]!=staff)whichsound=clank1sound+abs(rand()%4);
 					}
-					else whichsound=footstepsound+abs(Random()%2);
+					else whichsound=footstepsound+abs(rand()%2);
 					gLoc[0]=tippoint[i].x;
 					gLoc[1]=tippoint[i].y;
 					gLoc[2]=tippoint[i].z;
@@ -1101,7 +1101,7 @@ void 	Weapons::DoStuff(){
 						normalrot.y=1;
 					}
 				}
-				sprites.MakeSprite(weaponflamesprite, position[i]+tippoint[i]*(((float)abs(Random()%100))/600+.05),normalrot, 1,1,1, (.6+(float)abs(Random()%100)/200-.25)*1/3, 1);
+				sprites.MakeSprite(weaponflamesprite, position[i]+tippoint[i]*(((float)abs(rand()%100))/600+.05),normalrot, 1,1,1, (.6+(float)abs(rand()%100)/200-.25)*1/3, 1);
 				sprites.speed[sprites.numsprites-1]=4;
 				sprites.alivetime[sprites.numsprites-1]=.3;
 			}
@@ -1113,10 +1113,10 @@ void 	Weapons::DoStuff(){
 				flamedelay[i]=.020;
 				flamedelay[i]-=multiplier;
 				normalrot=0;
-				if(Random()%50==0&&findDistancefast(&position[i],&viewer)>80){
+				if(rand()%50==0&&findDistancefast(&position[i],&viewer)>80){
 					XYZ shinepoint;
-					shinepoint=position[i]+(tippoint[i]-position[i])*(((float)abs(Random()%100))/100);
-					sprites.MakeSprite(weaponshinesprite, shinepoint,normalrot, 1,1,1, (.1+(float)abs(Random()%100)/200-.25)*1/3*fast_sqrt(findDistance(&shinepoint,&viewer)), 1);
+					shinepoint=position[i]+(tippoint[i]-position[i])*(((float)abs(rand()%100))/100);
+					sprites.MakeSprite(weaponshinesprite, shinepoint,normalrot, 1,1,1, (.1+(float)abs(rand()%100)/200-.25)*1/3*fast_sqrt(findDistance(&shinepoint,&viewer)), 1);
 					sprites.speed[sprites.numsprites-1]=4;
 					sprites.alivetime[sprites.numsprites-1]=.3;
 				}
