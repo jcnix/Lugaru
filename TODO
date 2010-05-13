@@ -1,0 +1,3 @@
+use system libpng, zlib and OpenAL.
+
+Have a compile-time option to use local directories instead of ~/.lugaru.

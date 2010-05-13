@@ -1,5 +1,4 @@
-Data/lugaru-bin
-syntax:glob
+Data
 bin
 run
 Xcode/build
@@ -20,4 +19,3 @@ depcomp
 install-sh
 missing
 stamp-h1
-
