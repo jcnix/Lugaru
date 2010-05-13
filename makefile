@@ -1,4 +1,3 @@
-
 macosx := false
 use_devil := false
 use_fmod := false
@@ -13,7 +12,7 @@ OPT += -O3 -fno-strict-aliasing -falign-loops=16 -fno-math-errno
 
 BINDIR := obj
 RUNDIR := Data
-SRCDIR := Source
+SRCDIR := src
 LIBPNGDIR := libpng-1.2.8
 ZLIBDIR := zlib-1.2.3
 OPENALDIR := OpenAL
@@ -101,7 +100,7 @@ else
 	LD := g++
 
   	CFLAGS += -DPLATFORM_LINUX=1
-  	LDFLAGS += -lSDL -ljpeg -lGL -lGLU -logg -lvorbis -lvorbisenc -lvorbisfile -lz -lpng
+  	LDFLAGS += -lSDL -ljpeg -lGL -lGLU -logg -lvorbis -lvorbisenc -lvorbisfile
 
   	ifeq ($(strip $(use_devil)),true)
     	LDFLAGS += ./libIL.so.1 ./libILU.so.1 ./libILUT.so.1
@@ -223,6 +222,11 @@ ZLIBSRCS = \
 	zutil.c \
 
 ZLIBSRCS := $(foreach f,$(ZLIBSRCS),$(ZLIBDIR)/$(f))
+
+
+ifeq ($(strip $(use_devil)),false)
+    SRCS += $(PNGSRCS) $(ZLIBSRCS)
+endif
 
 OBJS := $(SRCS:.CC=.o)
 OBJS := $(OBJS:.cc=.o)

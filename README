@@ -1,16 +1,7 @@
-text by Jookia:
-
 Hey, I'm forking a fork. Pretty cool.
 Currently it's playable. Yayies!
 
 Okay, here's the deal. Replace data folder from here with the one from your Lugaru install.
-
-original text by the original forker:
-
-This is my fork of Lugaru, Wolfire's ninja rabbit fighting game.
-On May 11, 2010 Wolfire released the game as open source software
-under the GNU GPL.
-
-This fork's primary focus is getting Lugaru's code to actually work.
-The released code is messy, especially the build system.
-
+Make sure you have SDL, libjpeg, libGL, libOGG and libVorbis installed.
+Navigate to this folder in a terminal and type make, (if you're on Ubuntu, get the
+build-essential package from Synaptic Package Manager.)
