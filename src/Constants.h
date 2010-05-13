@@ -92,7 +92,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define constraint 1
 #define muscle 2
 
-#define head 0
+const int head = 0; // DO NOT CONFLICT WITH ZLIB's variable head
 #define neck 1
 #define leftshoulder 2
 #define leftelbow 3
