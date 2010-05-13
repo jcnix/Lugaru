@@ -3,5 +3,5 @@ Currently it's playable. Yayies!
 
 Okay, here's the deal. Replace data folder from here with the one from your Lugaru install.
 Make sure you have SDL, libjpeg, libGL, libOGG and libVorbis installed.
-Navigate to this folder in a terminal and type make, (if you're on Ubuntu, get the
-build-essential package from Synaptic Package Manager.)
+
+Navigate to this folder in a terminal and type './autogen.sh' then 'make'. Done.
