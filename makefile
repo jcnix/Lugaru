@@ -180,11 +180,6 @@ SRCS := \
 SRCS := $(foreach f,$(SRCS),$(SRCDIR)/$(f))
 
 
-UNUSED_SRCS := \
-	DRIVER.CC \
-	MD5.CC \
-
-
 PNGSRCS := \
     png.c \
     pngerror.c \
