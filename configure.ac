@@ -16,7 +16,6 @@ PKG_CHECK_MODULES(SDL, sdl)
 PKG_CHECK_MODULES(OpenAL, openal)
 PKG_CHECK_MODULES(GL, gl glu)
 PKG_CHECK_MODULES(png, libpng)
-PKG_CHECK_MODULES(zlib, zlib)
 PKG_CHECK_MODULES(ogg, ogg)
 PKG_CHECK_MODULES(vorbis, vorbis vorbisfile)
 

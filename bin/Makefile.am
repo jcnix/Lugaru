@@ -1,12 +1,12 @@
 bin_PROGRAMS = lugaru
 
 lugaru_CPPFLAGS=$(SDL_CFLAGS) $(OpenAL_CFLAGS) $(GL_CFLAGS) \
-				$(zlib_CFLAGS) $(png_CFLAGS) $(ogg_CFLAGS) \
+				$(png_CFLAGS) $(ogg_CFLAGS) \
 				$(vorbis_CFLAGS)
 
-lugaru_LDADD=$(SDL_LIBS) $(OpenAL_LIBS) $(GL_LIBS) $(zlib_LIBS) \
+lugaru_LDADD=$(SDL_LIBS) $(OpenAL_LIBS) $(GL_LIBS) \
 			 $(png_libs) $(ogg_LIBS) $(vorbis_LIBS) \
-			 -lpng -ljpeg
+			 -lpng -ljpeg -lz
 
 lugaru_SOURCES = \
 	../src/Frustum.cpp \
