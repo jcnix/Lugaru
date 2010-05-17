@@ -1322,6 +1322,10 @@ static inline void chdirToAppPath(const char *argv0)
 }
 #endif
 
+#ifndef WIN32
+#include <libgen.h>
+#include <unistd.h>
+#endif
 
 int main(int argc, char **argv)
 {
@@ -1332,7 +1336,15 @@ int main(int argc, char **argv)
 
     // !!! FIXME: we could use a Win32 API for this.  --ryan.
 #ifndef WIN32
-    chdirToAppPath(argv[0]);
+    //Begin hacky code by Jookia.. Reading symbolic links from the kernel, ugh
+    char buf[1024];
+    size_t len;
+
+    if((len = readlink("/proc/self/exe", buf, sizeof(buf)-1)) != -1)
+        buf[len] = 0x0;
+
+    //Remove the file name from the link location and change the path.
+    chdirToAppPath(dirname(buf));
 #endif
 
 	LOGFUNC;
