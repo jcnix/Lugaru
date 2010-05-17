@@ -450,21 +450,21 @@ bool Terrain::load(const char *fileName)
 		for(j=0;j<size;j++){
 			heightmap[i][j]*=.5;
 
-			texoffsetx[i][j]=(float)abs(Random()%100)/1200/scale*3;
-			texoffsety[i][j]=(float)abs(Random()%100)/1200/scale*3;
+			texoffsetx[i][j]=(float)abs(rand()%100)/1200/scale*3;
+			texoffsety[i][j]=(float)abs(rand()%100)/1200/scale*3;
 
 			slopeness=0;
 			if(environment==snowyenvironment){
 				if(j!=0&&heightmap[i][j]-heightmap[i][j-1]>slopeness){		slopeness=heightmap[i][j]-heightmap[i][j-1];}
 				opacityother[i][j]=slopeness*slopeness*2;
 				if(opacityother[i][j]>1)opacityother[i][j]=1;
-				opacityother[i][j]-=(float)abs(Random()%100)/300;
+				opacityother[i][j]-=(float)abs(rand()%100)/300;
 			}
 			if(environment==desertenvironment){
 				if(j!=0&&heightmap[i][j]-heightmap[i][j-1]>slopeness){		slopeness=heightmap[i][j]-heightmap[i][j-1];}
 				opacityother[i][j]=slopeness*slopeness*2;
 				if(opacityother[i][j]>1)opacityother[i][j]=1;
-				opacityother[i][j]-=(float)abs(Random()%100)/300;
+				opacityother[i][j]-=(float)abs(rand()%100)/300;
 			}
 			if(environment==grassyenvironment){
 				if(i!=0&&heightmap[i][j]-heightmap[i-1][j]>slopeness){		slopeness=heightmap[i][j]-heightmap[i-1][j];}
@@ -473,7 +473,7 @@ bool Terrain::load(const char *fileName)
 				if(j<size-1&&heightmap[i][j]-heightmap[i][j+1]>slopeness){		slopeness=heightmap[i][j]-heightmap[i][j+1];}
 				opacityother[i][j]=slopeness*slopeness*10;
 				if(opacityother[i][j]>1)opacityother[i][j]=1;
-				opacityother[i][j]-=(float)abs(Random()%100)/100;
+				opacityother[i][j]-=(float)abs(rand()%100)/100;
 			}
 		}
 	}

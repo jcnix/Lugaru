@@ -9,31 +9,30 @@ lugaru_LDADD=$(SDL_LIBS) $(OpenAL_LIBS) $(GL_LIBS) \
 			 -lpng -ljpeg -lz
 
 lugaru_SOURCES = \
-	../src/Frustum.cpp \
-	../src/GameDraw.cpp \
-	../src/GameInitDispose.cpp \
-	../src/GameTick.cpp \
-	../src/Globals.cpp \
-	../src/Lights.cpp \
-	../src/Models.cpp \
-	../src/Objects.cpp \
-	../src/pack.c \
-	../src/pack_private.c \
-	../src/Person.cpp \
-	../src/private.c \
-	../src/Quaternions.cpp \
-	../src/Skeleton.cpp \
-	../src/Skybox.cpp \
-	../src/Sprites.cpp \
-	../src/Terrain.cpp \
-	../src/Text.cpp \
-	../src/TGALoader.cpp \
-	../src/unpack.c \
-	../src/unpack_private.c \
-	../src/Weapons.cpp \
-	../src/MacCompatibility.cpp \
-	../src/logger/logger.cpp \
-	../src/WinInput.cpp \
-	../src/OpenGL_Windows.cpp \
-	../src/openal_wrapper.cpp
+	../Source/Frustum.cpp \
+	../Source/GameDraw.cpp \
+	../Source/GameInitDispose.cpp \
+	../Source/GameTick.cpp \
+	../Source/Globals.cpp \
+	../Source/Lights.cpp \
+	../Source/Models.cpp \
+	../Source/Objects.cpp \
+	../Source/pack.c \
+	../Source/pack_private.c \
+	../Source/Person.cpp \
+	../Source/private.c \
+	../Source/Quaternions.cpp \
+	../Source/Skeleton.cpp \
+	../Source/Skybox.cpp \
+	../Source/Sprites.cpp \
+	../Source/Terrain.cpp \
+	../Source/Text.cpp \
+	../Source/TGALoader.cpp \
+	../Source/unpack.c \
+	../Source/unpack_private.c \
+	../Source/Weapons.cpp \
+	../Source/MacCompatibility.cpp \
+	../Source/WinInput.cpp \
+	../Source/OpenGL_Windows.cpp \
+	../Source/openal_wrapper.cpp
 

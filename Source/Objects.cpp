@@ -488,7 +488,7 @@ void Objects::DeleteObject(int which)
 void Objects::MakeObject(int atype, XYZ where, float arotation, float ascale){
 	if((atype!=treeleavestype&&atype!=bushtype)||foliage==1){
 		scale[numobjects]=ascale;
-		if(atype==treeleavestype)scale[numobjects]+=fabs((float)(Random()%100)/900)*ascale;
+		if(atype==treeleavestype)scale[numobjects]+=fabs((float)(rand()%100)/900)*ascale;
 
 		onfire[numobjects]=0;
 		flamedelay[numobjects]=0;
@@ -571,7 +571,7 @@ void Objects::MakeObject(int atype, XYZ where, float arotation, float ascale){
 void Objects::MakeObject(int atype, XYZ where, float arotation, float arotation2, float ascale){
 	if((atype!=treeleavestype&&atype!=bushtype)||foliage==1){
 		scale[numobjects]=ascale;
-		if(atype==treeleavestype)scale[numobjects]+=fabs((float)(Random()%100)/900)*ascale;
+		if(atype==treeleavestype)scale[numobjects]+=fabs((float)(rand()%100)/900)*ascale;
 
 		onfire[numobjects]=0;
 		flamedelay[numobjects]=0;
@@ -675,20 +675,20 @@ void Objects::DoStuff()
 			while(flamedelay[i]<0&&onfire[i]){
 				flamedelay[i]+=.006;
 				if(type[i]==bushtype||type[i]==firetype){
-					spawnpoint.x=((float)(Random()%100))/30*scale[i];
-					spawnpoint.y=((float)(Random()%100)+60)/30*scale[i];
+					spawnpoint.x=((float)(rand()%100))/30*scale[i];
+					spawnpoint.y=((float)(rand()%100)+60)/30*scale[i];
 					spawnpoint.z=0;
-					spawnpoint=DoRotation(spawnpoint,0,Random()%360,0);
+					spawnpoint=DoRotation(spawnpoint,0,rand()%360,0);
 					spawnpoint+=position[i];
-					sprites.MakeSprite(flamesprite, spawnpoint,spawnpoint*0, 1,1,1, (.6+(float)abs(Random()%100)/200-.25)*5*scale[i], 1);
+					sprites.MakeSprite(flamesprite, spawnpoint,spawnpoint*0, 1,1,1, (.6+(float)abs(rand()%100)/200-.25)*5*scale[i], 1);
 				}
 				if(type[i]==treeleavestype){
-					spawnpoint.x=((float)(Random()%100))/80*scale[i];
-					spawnpoint.y=((float)(Random()%100)+80)/12*scale[i];
+					spawnpoint.x=((float)(rand()%100))/80*scale[i];
+					spawnpoint.y=((float)(rand()%100)+80)/12*scale[i];
 					spawnpoint.z=0;
-					spawnpoint=DoRotation(spawnpoint,0,Random()%360,0);
+					spawnpoint=DoRotation(spawnpoint,0,rand()%360,0);
 					spawnpoint+=position[i];
-					sprites.MakeSprite(flamesprite, spawnpoint,spawnpoint*0, 1,1,1, (.6+(float)abs(Random()%100)/200-.25)*6, 1);
+					sprites.MakeSprite(flamesprite, spawnpoint,spawnpoint*0, 1,1,1, (.6+(float)abs(rand()%100)/200-.25)*6, 1);
 				}
 			}
 

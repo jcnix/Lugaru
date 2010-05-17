@@ -19,6 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "config.h"
 #include "Game.h"
 #include "openal_wrapper.h"
 
@@ -321,12 +322,12 @@ int Game::DrawGLScene(void)
 		glDrawBuffer(GL_BACK);
 		glReadBuffer(GL_BACK);
 
-		/*if(environment==desertenvironment)glTexEnvf( GL_TEXTURE_FILTER_CONTROL_EXT, GL_TEXTURE_LOD_BIAS_EXT, (float)(abs(Random()%100))/50 );
+		/*if(environment==desertenvironment)glTexEnvf( GL_TEXTURE_FILTER_CONTROL_EXT, GL_TEXTURE_LOD_BIAS_EXT, (float)(abs(rand()%100))/50 );
 		else glTexEnvf( GL_TEXTURE_FILTER_CONTROL_EXT, GL_TEXTURE_LOD_BIAS_EXT, 0);
 		*/
 		if(abs(blurness-targetblurness)<multiplier*10||abs(blurness-targetblurness)>2){
 			blurness=targetblurness;
-			targetblurness=(float)(abs(Random()%100))/40;
+			targetblurness=(float)(abs(rand()%100))/40;
 		}
 		if(blurness<targetblurness)blurness+=multiplier*5;
 		if(blurness>targetblurness)blurness-=multiplier*5;
@@ -348,19 +349,19 @@ int Game::DrawGLScene(void)
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 		glLoadIdentity ();
 		if(!cameramode&&!freeze&&!winfreeze){
-			glRotatef(float(Random()%100)/10*camerashake/*+(woozy*woozy)/10*/,0,0,1);
+			glRotatef(float(rand()%100)/10*camerashake/*+(woozy*woozy)/10*/,0,0,1);
 			glRotatef(rotation2+sin(woozy/2)*(player[0].damage/player[0].damagetolerance)*5,1,0,0);
 			glRotatef(rotation+sin(woozy)*(player[0].damage/player[0].damagetolerance)*5,0,1,0);
 		}
 		if(cameramode||freeze||winfreeze){
-			//glRotatef(float(Random()%100)/10*camerashake/*+(woozy*woozy)/10*/,0,0,1);
+			//glRotatef(float(rand()%100)/10*camerashake/*+(woozy*woozy)/10*/,0,0,1);
 			glRotatef(rotation2,1,0,0);
 			glRotatef(rotation,0,1,0);
 		}
 
 		if(environment==desertenvironment){
-			glRotatef((float)(abs(Random()%100))/3000-1,1,0,0);
-			glRotatef((float)(abs(Random()%100))/3000-1,0,1,0);
+			glRotatef((float)(abs(rand()%100))/3000-1,1,0,0);
+			glRotatef((float)(abs(rand()%100))/3000-1,0,1,0);
 			//glRotatef(blurness/40-1,1,0,0);
 			//glRotatef(blurness/40-1,0,1,0);
 		}
@@ -368,8 +369,8 @@ int Game::DrawGLScene(void)
 		glPushMatrix();
 		if(environment==desertenvironment&&detail==2)glTexEnvf( GL_TEXTURE_FILTER_CONTROL_EXT, GL_TEXTURE_LOD_BIAS_EXT, blurness+.4 );
 		if(environment==desertenvironment){
-			glRotatef((float)(abs(Random()%100))/1000,1,0,0);
-			glRotatef((float)(abs(Random()%100))/1000,0,1,0);
+			glRotatef((float)(abs(rand()%100))/1000,1,0,0);
+			glRotatef((float)(abs(rand()%100))/1000,0,1,0);
 		}	
 		skybox.draw();
 		glTexEnvf( GL_TEXTURE_FILTER_CONTROL_EXT, GL_TEXTURE_LOD_BIAS_EXT, 0);
@@ -509,7 +510,7 @@ int Game::DrawGLScene(void)
 					glColor4f(terrainlight.x,terrainlight.y,terrainlight.z,distance);
 					if(distance>=1)glDisable(GL_BLEND);
 					if(distance>=.5){
-						checkpoint=DoRotation(player[k].skeleton.joints[abs(Random()%player[k].skeleton.num_joints)].position,0,player[k].rotation,0)*player[k].scale+player[k].coords;
+						checkpoint=DoRotation(player[k].skeleton.joints[abs(rand()%player[k].skeleton.num_joints)].position,0,player[k].rotation,0)*player[k].scale+player[k].coords;
 						checkpoint.y+=1;
 						if(!player[k].occluded==0)i=checkcollide(viewer,checkpoint,player[k].lastoccluded);
 						if(i==-1||player[k].occluded==0)i=checkcollide(viewer,checkpoint);
@@ -563,7 +564,7 @@ int Game::DrawGLScene(void)
 		glColor4f(terrainlight.x,terrainlight.y,terrainlight.z,distance);
 		if(distance>=1)glDisable(GL_BLEND);
 		if(distance>0){
-		checkpoint=DoRotation(player[k].skeleton.joints[abs(Random()%player[k].skeleton.num_joints)].position,0,player[k].rotation,0)*player[k].scale+player[k].coords;
+		checkpoint=DoRotation(player[k].skeleton.joints[abs(rand()%player[k].skeleton.num_joints)].position,0,player[k].rotation,0)*player[k].scale+player[k].coords;
 		checkpoint.y+=1;
 		if(checkcollide(viewer,checkpoint)){
 		player[k].occluded+=1;
@@ -587,7 +588,7 @@ int Game::DrawGLScene(void)
 				glColor4f(terrainlight.x,terrainlight.y,terrainlight.z,distance);
 				if(distance>=1)glDisable(GL_BLEND);
 				if(distance>=.5){
-					checkpoint=DoRotation(player[k].skeleton.joints[abs(Random()%player[k].skeleton.num_joints)].position,0,player[k].rotation,0)*player[k].scale+player[k].coords;
+					checkpoint=DoRotation(player[k].skeleton.joints[abs(rand()%player[k].skeleton.num_joints)].position,0,player[k].rotation,0)*player[k].scale+player[k].coords;
 					checkpoint.y+=1;
 					if(!player[k].occluded==0)i=checkcollide(viewer,checkpoint,player[k].lastoccluded);
 					if(i==-1||player[k].occluded==0)i=checkcollide(viewer,checkpoint);
@@ -1246,10 +1247,10 @@ int Game::DrawGLScene(void)
 						sprintf (string, "Object size: %f",editorsize);
 						text.glPrint(10,75,string,0,.8,1024,768);
 						if(editorrotation>=0)sprintf (string, "Object rotation: %f",editorrotation);
-						else sprintf (string, "Object rotation: Random");
+						else sprintf (string, "Object rotation: rand");
 						text.glPrint(10,90,string,0,.8,1024,768);
 						if(editorrotation2>=0)sprintf (string, "Object rotation2: %f",editorrotation2);
-						else sprintf (string, "Object rotation2: Random");
+						else sprintf (string, "Object rotation2: rand");
 						text.glPrint(10,105,string,0,.8,1024,768);
 						sprintf (string, "Object type: %d",editortype);
 						text.glPrint(10,120,string,0,.8,1024,768);

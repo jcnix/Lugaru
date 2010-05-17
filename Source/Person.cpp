@@ -197,7 +197,7 @@ void Person::CatchFire(){
 	XYZ flatfacing,flatvelocity;
 	int howmany;
 	for(int i=0;i<10;i++){
-		howmany=abs(Random()%(skeleton.num_joints));
+		howmany=abs(rand()%(skeleton.num_joints));
 		if(!skeleton.free)flatvelocity=velocity;
 		if(skeleton.free)flatvelocity=skeleton.joints[howmany].velocity;
 		if(!skeleton.free)flatfacing=DoRotation(DoRotation(DoRotation(skeleton.joints[howmany].position,0,0,tilt),tilt2,0,0),0,rotation,0)*scale+coords;
@@ -427,13 +427,13 @@ void Person::DoBlood(float howmuch,int which){
 				bloodvel=0;
 				if(!skeleton.free){
 					bloodvel.z=10;
-					bloodvel=DoRotation(bloodvel,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
+					bloodvel=DoRotation(bloodvel,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
 				}
 				if(skeleton.free){
-					bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(Random()%100))/4,((float)(Random()%100))/4,0);
+					bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(rand()%100))/4,((float)(rand()%100))/4,0);
 				}
-				if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
-				if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(Random()%100))/4,((float)(Random()%100))/4,0)*scale;
+				if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
+				if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(rand()%100))/4,((float)(rand()%100))/4,0)*scale;
 				if(skeleton.free){
 					sprites.MakeSprite(bloodsprite, skeleton.joints[skeleton.jointlabels[head]].position*scale+coords,bloodvel, 1,1,1, .05, 1);
 					sprites.MakeSprite(bloodflamesprite, skeleton.joints[skeleton.jointlabels[head]].position*scale+coords,bloodvel, 1,1,1, .3, 1);
@@ -443,19 +443,19 @@ void Person::DoBlood(float howmuch,int which){
 					sprites.MakeSprite(bloodflamesprite, DoRotation((skeleton.joints[skeleton.jointlabels[head]].position+skeleton.joints[skeleton.jointlabels[neck]].position)/2,0,rotation,0)*scale+coords,bloodvel, 1,1,1, .3, 1);
 				}
 			}
-			if(Random()%2==0)
+			if(rand()%2==0)
 				for(int i=0;i<3;i++){
-					if(Random()%2!=0){
+					if(rand()%2!=0){
 						bloodvel=0;
 						if(!skeleton.free){
 							bloodvel.z=10;
-							bloodvel=DoRotation(bloodvel,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
+							bloodvel=DoRotation(bloodvel,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
 						}
 						if(skeleton.free){
-							bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(Random()%100))/4,((float)(Random()%100))/4,0);
+							bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(rand()%100))/4,((float)(rand()%100))/4,0);
 						}
-						if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
-						if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(Random()%100))/4,((float)(Random()%100))/4,0)*scale;
+						if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
+						if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(rand()%100))/4,((float)(rand()%100))/4,0)*scale;
 						bloodvel*=.2;
 						if(skeleton.free){
 							sprites.MakeSprite(splintersprite, skeleton.joints[skeleton.jointlabels[head]].position*scale+coords,bloodvel, 1,1,1, .05, 1);
@@ -469,25 +469,25 @@ void Person::DoBlood(float howmuch,int which){
 				}
 		}
 		if(decals){
-			bleeding=howmuch+(float)abs(Random()%100)/200-.25;
+			bleeding=howmuch+(float)abs(rand()%100)/200-.25;
 			bleedxint=0;
 			bleedyint=0;
 			int texdetailint=realtexdetail;
 			if(creature==rabbittype)
 				while(bloodText[bleedxint*512*3+bleedyint*3+0]>which+4||bloodText[bleedxint*512*3+bleedyint*3+0]<which-4||bleedxint<10||bleedyint<10||bleedxint>500||bleedyint>500){
-					bleedxint=abs(Random()%512);
-					bleedyint=abs(Random()%512);
+					bleedxint=abs(rand()%512);
+					bleedyint=abs(rand()%512);
 				}
 				if(creature==wolftype)
 					while(wolfbloodText[bleedxint*512*3+bleedyint*3+0]>which+4||wolfbloodText[bleedxint*512*3+bleedyint*3+0]<which-4||bleedxint<10||bleedyint<10||bleedxint>500||bleedyint>500){
-						bleedxint=abs(Random()%512);
-						bleedyint=abs(Random()%512);
+						bleedxint=abs(rand()%512);
+						bleedyint=abs(rand()%512);
 					}
 					bleedy=bleedxint;
 					bleedx=bleedyint;
 					bleedy/=realtexdetail;
 					bleedx/=realtexdetail;
-					direction=abs(Random()%2)*2-1;
+					direction=abs(rand()%2)*2-1;
 		}
 
 	}
@@ -512,7 +512,7 @@ void Person::DoBloodBig(float howmuch,int which){
 			vel[2]=velocity.z;
 
 			if(creature==wolftype){
-				int i=abs(Random()%2);
+				int i=abs(rand()%2);
 				if(i==0)whichsound=snarlsound;
 				if(i==1)whichsound=snarl2sound;
 				envsound[numenvsounds]=coords;
@@ -521,7 +521,7 @@ void Person::DoBloodBig(float howmuch,int which){
 				numenvsounds++;
 			}
 			if(creature==rabbittype){
-				int i=abs(Random()%2);
+				int i=abs(rand()%2);
 				if(i==0)whichsound=rabbitpainsound;
 				if(i==1&&howmuch>=2)whichsound=rabbitpain1sound;
 				envsound[numenvsounds]=coords;
@@ -554,13 +554,13 @@ void Person::DoBloodBig(float howmuch,int which){
 					bloodvel=0;
 					if(!skeleton.free){
 						bloodvel.z=10;
-						bloodvel=DoRotation(bloodvel,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
+						bloodvel=DoRotation(bloodvel,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
 					}
 					if(skeleton.free){
-						bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(Random()%100))/4,((float)(Random()%100))/4,0);
+						bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(rand()%100))/4,((float)(rand()%100))/4,0);
 					}
-					if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
-					if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(Random()%100))/4,((float)(Random()%100))/4,0)*scale;
+					if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
+					if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(rand()%100))/4,((float)(rand()%100))/4,0)*scale;
 					if(skeleton.free){
 						sprites.MakeSprite(bloodsprite, skeleton.joints[skeleton.jointlabels[head]].position*scale+coords,bloodvel, 1,1,1, .05, 1);
 						sprites.MakeSprite(bloodflamesprite, skeleton.joints[skeleton.jointlabels[head]].position*scale+coords,bloodvel, 1,1,1, .3, 1);
@@ -573,25 +573,25 @@ void Person::DoBloodBig(float howmuch,int which){
 			}
 			int offsetx=0,offsety=0;
 			if(which==225){
-				offsety=Random()%40;
-				offsetx=abs(Random()%60);
+				offsety=rand()%40;
+				offsetx=abs(rand()%60);
 			}
 			if(which==190||which==185){
-				offsety=Random()%40;
-				offsetx=abs(Random()%100)-20;
+				offsety=rand()%40;
+				offsetx=abs(rand()%100)-20;
 			}
 			if(which==175){
-				offsety=Random()%10;
-				offsetx=Random()%10;
+				offsety=rand()%10;
+				offsetx=rand()%10;
 			}
 			if(which==170){
-				offsety=Random()%20;
-				offsetx=Random()%20;
+				offsety=rand()%20;
+				offsetx=rand()%20;
 			}
 			if(which==220||which==215){
-				//offsety=Random()%20;
+				//offsety=rand()%20;
 				offsetx=20;
-				//offsetx=abs(Random()%80);
+				//offsetx=abs(rand()%80);
 			}
 
 
@@ -646,7 +646,7 @@ void Person::DoBloodBig(float howmuch,int which){
 						for(i=startx;i<endx;i++){
 							for(j=starty;j<endy;j++){
 								if(bloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]<=which+4&&bloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]>=which-4){
-									color=Random()%85+170;
+									color=rand()%85+170;
 									where=i*skeleton.skinsize*3+j*3;
 									if(skeleton.skinText[where+0]>color/2)skeleton.skinText[where+0]=color/2;
 									skeleton.skinText[where+1]=0;
@@ -658,7 +658,7 @@ void Person::DoBloodBig(float howmuch,int which){
 							for(i=startx;i<endx;i++){
 								for(j=starty;j<endy;j++){
 									if(wolfbloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]<=which+4&&wolfbloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]>=which-4){
-										color=Random()%85+170;
+										color=rand()%85+170;
 										where=i*skeleton.skinsize*3+j*3;
 										if(skeleton.skinText[where+0]>color/2)skeleton.skinText[where+0]=color/2;
 										skeleton.skinText[where+1]=0;
@@ -674,13 +674,13 @@ void Person::DoBloodBig(float howmuch,int which){
 							bleedyint=0;
 							if(creature==rabbittype)
 								while(bloodText[bleedxint*512*3+bleedyint*3+0]>which+4||bloodText[bleedxint*512*3+bleedyint*3+0]<which-4||bleedxint<10||bleedyint<10||bleedxint>500||bleedyint>500){
-									bleedxint=abs(Random()%512);
-									bleedyint=abs(Random()%512);
+									bleedxint=abs(rand()%512);
+									bleedyint=abs(rand()%512);
 								}
 								if(creature==wolftype)
 									while(wolfbloodText[bleedxint*512*3+bleedyint*3+0]>which+4||wolfbloodText[bleedxint*512*3+bleedyint*3+0]<which-4||bleedxint<10||bleedyint<10||bleedxint>500||bleedyint>500){
-										bleedxint=abs(Random()%512);
-										bleedyint=abs(Random()%512);
+										bleedxint=abs(rand()%512);
+										bleedyint=abs(rand()%512);
 									}
 									bleedy=bleedxint+offsetx;
 									bleedx=bleedyint+offsety;
@@ -690,15 +690,15 @@ void Person::DoBloodBig(float howmuch,int which){
 									if(bleedy<0)bleedy=0;
 									if(bleedx>skeleton.skinsize-1)bleedx=skeleton.skinsize-1;
 									if(bleedy>skeleton.skinsize-1)bleedy=skeleton.skinsize-1;
-									direction=abs(Random()%2)*2-1;
+									direction=abs(rand()%2)*2-1;
 
 		}
-		bleeding=howmuch+(float)abs(Random()%100)/200-.25;
+		bleeding=howmuch+(float)abs(rand()%100)/200-.25;
 		deathbleeding+=bleeding;
 		bloodloss+=bleeding*3;
 
 		if(tutoriallevel!=1&&aitype!=playercontrolled&&bloodloss>damagetolerance*2/3&&bloodloss<damagetolerance&&creature==rabbittype){
-			if(abs(Random()%2)==0){aitype=gethelptype;
+			if(abs(rand()%2)==0){aitype=gethelptype;
 			lastseentime=12;
 			}
 			else aitype=attacktypecutoff;
@@ -781,13 +781,13 @@ bool Person::DoBloodBigWhere(float howmuch,int which, XYZ where){
 					bloodvel=0;
 					if(!skeleton.free){
 						bloodvel.z=10;
-						bloodvel=DoRotation(bloodvel,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
+						bloodvel=DoRotation(bloodvel,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
 					}
 					if(skeleton.free){
-						bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(Random()%100))/4,((float)(Random()%100))/4,0);
+						bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(rand()%100))/4,((float)(rand()%100))/4,0);
 					}
-					if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
-					if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(Random()%100))/4,((float)(Random()%100))/4,0)*scale;
+					if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
+					if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(rand()%100))/4,((float)(rand()%100))/4,0)*scale;
 					if(skeleton.free){
 						sprites.MakeSprite(bloodsprite, skeleton.joints[skeleton.jointlabels[head]].position*scale+coords,bloodvel, 1,1,1, .05, 1);
 						sprites.MakeSprite(bloodflamesprite, skeleton.joints[skeleton.jointlabels[head]].position*scale+coords,bloodvel, 1,1,1, .3, 1);
@@ -800,12 +800,12 @@ bool Person::DoBloodBigWhere(float howmuch,int which, XYZ where){
 			}
 			int offsetx=0,offsety=0;
 			/*if(which==225){
-			offsety=Random()%40;
-			offsetx=abs(Random()%120);
+			offsety=rand()%40;
+			offsetx=abs(rand()%120);
 			}
 			if(which==220||which==215){
-			offsety=Random()%20;
-			offsetx=abs(Random()%80);
+			offsety=rand()%20;
+			offsetx=abs(rand()%80);
 			}*/
 			//which=220;
 			offsetx=(1+coordsy)*512-291;
@@ -861,14 +861,14 @@ bool Person::DoBloodBigWhere(float howmuch,int which, XYZ where){
 						for(i=startx;i<endx;i++){
 							for(j=starty;j<endy;j++){
 								if(bloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]<=which+4&&bloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]>=which-4){
-									color=Random()%85+170;
+									color=rand()%85+170;
 									where=i*skeleton.skinsize*3+j*3;
 									if(skeleton.skinText[where+0]>color/2)skeleton.skinText[where+0]=color/2;
 									skeleton.skinText[where+1]=0;
 									skeleton.skinText[where+2]=0;
 								}
 								else if(bloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]<=160+4&&bloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]>=160-4){
-									color=Random()%85+170;
+									color=rand()%85+170;
 									where=i*skeleton.skinsize*3+j*3;
 									if(skeleton.skinText[where+0]>color/2)skeleton.skinText[where+0]=color/2;
 									skeleton.skinText[where+1]=0;
@@ -880,14 +880,14 @@ bool Person::DoBloodBigWhere(float howmuch,int which, XYZ where){
 							for(i=startx;i<endx;i++){
 								for(j=starty;j<endy;j++){
 									if(wolfbloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]<=which+4&&wolfbloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]>=which-4){
-										color=Random()%85+170;
+										color=rand()%85+170;
 										where=i*skeleton.skinsize*3+j*3;
 										if(skeleton.skinText[where+0]>color/2)skeleton.skinText[where+0]=color/2;
 										skeleton.skinText[where+1]=0;
 										skeleton.skinText[where+2]=0;
 									}
 									else if(wolfbloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]<=160+4&&wolfbloodText[(i*texdetailint-offsetx)*512*3+(j*texdetailint-offsety)*3+0]>=160-4){
-										color=Random()%85+170;
+										color=rand()%85+170;
 										where=i*skeleton.skinsize*3+j*3;
 										if(skeleton.skinText[where+0]>color/2)skeleton.skinText[where+0]=color/2;
 										skeleton.skinText[where+1]=0;
@@ -907,16 +907,16 @@ bool Person::DoBloodBigWhere(float howmuch,int which, XYZ where){
 							if(bleedy<0)bleedy=0;
 							if(bleedx>skeleton.skinsize-1)bleedx=skeleton.skinsize-1;
 							if(bleedy>skeleton.skinsize-1)bleedy=skeleton.skinsize-1;
-							direction=abs(Random()%2)*2-1;
+							direction=abs(rand()%2)*2-1;
 		}
 		if(whichtri==-1)return 0;
 	}
-	bleeding=howmuch+(float)abs(Random()%100)/200-.25;
+	bleeding=howmuch+(float)abs(rand()%100)/200-.25;
 	deathbleeding+=bleeding;
 	bloodloss+=bleeding*3;
 
 	if(tutoriallevel!=1&&aitype!=playercontrolled&&bloodloss>damagetolerance*2/3&&bloodloss<damagetolerance&&creature==rabbittype){
-		if(abs(Random()%2)==0){aitype=gethelptype;
+		if(abs(rand()%2)==0){aitype=gethelptype;
 		lastseentime=12;
 		}
 		else aitype=attacktypecutoff;
@@ -1024,7 +1024,7 @@ void Person::Reverse(){
 				victim->currentanimation=upunchreversalanim;
 				victim->targetanimation=upunchreversalanim;
 			}
-			if(targetanimation==staffhitanim&&findDistancefast(&victim->coords,&coords)<2&&((victim->id==0&&victim->crouchkeydown)||Random()%4==0)){
+			if(targetanimation==staffhitanim&&findDistancefast(&victim->coords,&coords)<2&&((victim->id==0&&victim->crouchkeydown)||rand()%4==0)){
 				if(victim->weaponactive!=-1){
 					victim->throwtogglekeydown=1;
 					weapons.owner[victim->weaponids[0]]=-1;
@@ -1052,7 +1052,7 @@ void Person::Reverse(){
 				victim->currentanimation=staffhitreversalanim;
 				victim->targetanimation=staffhitreversalanim;
 			}
-			if(targetanimation==staffspinhitanim&&findDistancefast(&victim->coords,&coords)<2&&((victim->id==0&&victim->crouchkeydown)||Random()%2==0)){
+			if(targetanimation==staffspinhitanim&&findDistancefast(&victim->coords,&coords)<2&&((victim->id==0&&victim->crouchkeydown)||rand()%2==0)){
 				if(victim->weaponactive!=-1){
 					victim->throwtogglekeydown=1;
 					weapons.owner[victim->weaponids[0]]=-1;
@@ -1079,7 +1079,7 @@ void Person::Reverse(){
 				victim->currentanimation=staffspinhitreversalanim;
 				victim->targetanimation=staffspinhitreversalanim;
 			}
-			if(targetanimation==swordslashanim&&findDistancefast(&victim->coords,&coords)<2&&((victim->id==0&&victim->crouchkeydown)||Random()%4==0)){
+			if(targetanimation==swordslashanim&&findDistancefast(&victim->coords,&coords)<2&&((victim->id==0&&victim->crouchkeydown)||rand()%4==0)){
 				if(victim->weaponactive!=-1){
 					victim->throwtogglekeydown=1;
 					weapons.owner[victim->weaponids[0]]=-1;
@@ -1106,7 +1106,7 @@ void Person::Reverse(){
 				victim->currentanimation=swordslashreversalanim;
 				victim->targetanimation=swordslashreversalanim;
 			}
-			if(targetanimation==knifeslashstartanim&&findDistancefast(&victim->coords,&coords)<2&&(victim->id==0||Random()%4==0)){
+			if(targetanimation==knifeslashstartanim&&findDistancefast(&victim->coords,&coords)<2&&(victim->id==0||rand()%4==0)){
 				if(victim->weaponactive!=-1){
 					victim->throwtogglekeydown=1;
 					weapons.owner[victim->weaponids[0]]=-1;
@@ -1171,7 +1171,7 @@ void Person::Reverse(){
 				victim->victim=this;
 				victim->targetrotation=targetrotation+180;
 
-				if(abs(Random()%20)==0||weapons.type[victim->weaponids[victim->weaponactive]]==knife){
+				if(abs(rand()%20)==0||weapons.type[victim->weaponids[victim->weaponactive]]==knife){
 					float gLoc[3];
 					float vel[3];
 					gLoc[0]=victim->coords.x;
@@ -1182,8 +1182,8 @@ void Person::Reverse(){
 					vel[2]=velocity.z;
 					if(victim->weaponactive!=-1){
 						if(weapons.type[victim->weaponids[0]]==staff||weapons.type[weaponids[0]]==staff){
-							if(weapons.type[victim->weaponids[0]]==staff)weapons.damage[victim->weaponids[0]]+=.2+float(abs(Random()%100)-50)/250;
-							if(weapons.type[weaponids[0]]==staff)weapons.damage[weaponids[0]]+=.2+float(abs(Random()%100)-50)/250;
+							if(weapons.type[victim->weaponids[0]]==staff)weapons.damage[victim->weaponids[0]]+=.2+float(abs(rand()%100)-50)/250;
+							if(weapons.type[weaponids[0]]==staff)weapons.damage[weaponids[0]]+=.2+float(abs(rand()%100)-50)/250;
 
 							PlaySoundEx( swordstaffsound, samp[swordstaffsound], NULL, true);
 							OPENAL_3D_SetAttributes(channels[swordstaffsound], gLoc, vel);
@@ -1234,7 +1234,7 @@ void Person::Reverse(){
 					OPENAL_SetPaused(channels[metalhitsound], false);*/
 				}
 
-				if(abs(Random()%20)==0){
+				if(abs(rand()%20)==0){
 					float gLoc[3];
 					float vel[3];
 					gLoc[0]=coords.x;
@@ -1245,8 +1245,8 @@ void Person::Reverse(){
 					vel[2]=velocity.z;
 					if(weaponactive!=-1){
 						if(weapons.type[victim->weaponids[0]]==staff||weapons.type[weaponids[0]]==staff){
-							if(weapons.type[victim->weaponids[0]]==staff)weapons.damage[victim->weaponids[0]]+=.2+float(abs(Random()%100)-50)/250;
-							if(weapons.type[weaponids[0]]==staff)weapons.damage[weaponids[0]]+=.2+float(abs(Random()%100)-50)/250;
+							if(weapons.type[victim->weaponids[0]]==staff)weapons.damage[victim->weaponids[0]]+=.2+float(abs(rand()%100)-50)/250;
+							if(weapons.type[weaponids[0]]==staff)weapons.damage[weaponids[0]]+=.2+float(abs(rand()%100)-50)/250;
 
 							PlaySoundEx( swordstaffsound, samp[swordstaffsound], NULL, true);
 							OPENAL_3D_SetAttributes(channels[swordstaffsound], gLoc, vel);
@@ -1342,9 +1342,9 @@ void Person::Reverse(){
 				victim->velocity=0;
 
 				if(aitype!=playercontrolled)feint=0;
-				if(aitype!=playercontrolled&&Random()%3==0&&escapednum<2&&difficulty==2)feint=1;
-				if(aitype!=playercontrolled&&Random()%5==0&&escapednum<2&&difficulty==1)feint=1;
-				if(aitype!=playercontrolled&&Random()%10==0&&escapednum<2&&difficulty==0)feint=1;
+				if(aitype!=playercontrolled&&rand()%3==0&&escapednum<2&&difficulty==2)feint=1;
+				if(aitype!=playercontrolled&&rand()%5==0&&escapednum<2&&difficulty==1)feint=1;
+				if(aitype!=playercontrolled&&rand()%10==0&&escapednum<2&&difficulty==0)feint=1;
 
 				if(victim->id==0&&animation[victim->targetanimation].attack==reversal)numreversals++;
 		}
@@ -1358,8 +1358,8 @@ void Person::DoDamage(float howmuch){
 	if(id==0&&(bonus==solidhit||bonus==twoxcombo||bonus==threexcombo||bonus==fourxcombo||bonus==megacombo))bonus=0;
 	if(tutoriallevel!=1)permanentdamage+=howmuch/2/power;
 	if(tutoriallevel!=1)superpermanentdamage+=howmuch/4/power;
-	if(permanentdamage>damagetolerance/2&&permanentdamage-howmuch<damagetolerance/2&&Random()%2)DoBlood(1,255);
-	if((permanentdamage>damagetolerance*.8&&Random()%2&&!deathbleeding)||spurt)DoBlood(1,255);
+	if(permanentdamage>damagetolerance/2&&permanentdamage-howmuch<damagetolerance/2&&rand()%2)DoBlood(1,255);
+	if((permanentdamage>damagetolerance*.8&&rand()%2&&!deathbleeding)||spurt)DoBlood(1,255);
 	spurt=0;
 	if(id==0)camerashake+=howmuch/100;
 	if(id==0&&((howmuch>50&&damage>damagetolerance/2)))blackout=damage/damagetolerance;
@@ -1367,7 +1367,7 @@ void Person::DoDamage(float howmuch){
 
 	if(aitype==passivetype&&damage<damagetolerance&&((tutoriallevel!=1||cananger)&&hostile))aitype=attacktypecutoff;
 	if(tutoriallevel!=1&&aitype!=playercontrolled&&damage<damagetolerance&&damage>damagetolerance*2/3&&creature==rabbittype){
-		if(abs(Random()%2)==0){aitype=gethelptype;
+		if(abs(rand()%2)==0){aitype=gethelptype;
 		lastseentime=12;
 		}
 		else aitype=attacktypecutoff;
@@ -1382,9 +1382,9 @@ void Person::DoDamage(float howmuch){
 			if(skeleton.free)flatvelocity2=skeleton.joints[i].velocity;
 			if(!skeleton.free)flatfacing2=DoRotation(DoRotation(DoRotation(skeleton.joints[i].position,0,0,tilt),tilt2,0,0),0,rotation,0)*scale+coords;
 			if(skeleton.free)flatfacing2=skeleton.joints[i].position*scale+coords;
-			flatvelocity2.x+=(float)(abs(Random()%100)-50)/10;
-			flatvelocity2.y+=(float)(abs(Random()%100)-50)/10;
-			flatvelocity2.z+=(float)(abs(Random()%100)-50)/10;
+			flatvelocity2.x+=(float)(abs(rand()%100)-50)/10;
+			flatvelocity2.y+=(float)(abs(rand()%100)-50)/10;
+			flatvelocity2.z+=(float)(abs(rand()%100)-50)/10;
 			sprites.MakeSprite(bloodflamesprite, flatfacing2,flatvelocity2, 1,1,1, 3, 1);
 			sprites.MakeSprite(bloodsprite, flatfacing2,flatvelocity2, 1,1,1, .4, 1);
 			sprites.MakeSprite(cloudsprite, flatfacing2,flatvelocity2*0, .6,0,0, 1, .5);
@@ -1432,7 +1432,7 @@ void Person::DoDamage(float howmuch){
 			vel[2]=velocity.z;
 
 			if(creature==wolftype){
-				int i=abs(Random()%2);
+				int i=abs(rand()%2);
 				if(i==0)whichsound=snarlsound;
 				if(i==1)whichsound=snarl2sound;
 				envsound[numenvsounds]=coords;
@@ -1441,7 +1441,7 @@ void Person::DoDamage(float howmuch){
 				numenvsounds++;
 			}
 			if(creature==rabbittype){
-				int i=abs(Random()%2);
+				int i=abs(rand()%2);
 				if(i==0)whichsound=rabbitpainsound;
 				if(i==1&&damage>damagetolerance)whichsound=rabbitpain1sound;
 				envsound[numenvsounds]=coords;
@@ -1612,17 +1612,17 @@ void Person::RagDoll(bool checkcollision){
 		for(i=0;i<skeleton.num_joints;i++){
 			if((animation[currentanimation].attack!=reversed||currentanimation==swordslashreversedanim)&&currentanimation!=rabbitkickanim&&!isLanding()&&!wasLanding()&&animation[currentanimation].height==animation[targetanimation].height)skeleton.joints[i].velocity=velocity/scale+facing*5+DoRotation(DoRotation(DoRotation((animation[targetanimation].position[i][targetframe]-animation[currentanimation].position[i][currentframe])*speed,0,0,tilt),tilt2,0,0),0,rotation,0);
 			else skeleton.joints[i].velocity=velocity/scale+facing*5;
-			change.x=(float)(Random()%100)/100;
-			change.y=(float)(Random()%100)/100;
-			change.z=(float)(Random()%100)/100;
+			change.x=(float)(rand()%100)/100;
+			change.y=(float)(rand()%100)/100;
+			change.z=(float)(rand()%100)/100;
 			skeleton.joints[i].velocity+=change;
-			skeleton.joints[abs(Random()%skeleton.num_joints)].velocity-=change;
+			skeleton.joints[abs(rand()%skeleton.num_joints)].velocity-=change;
 
-			change.x=(float)(Random()%100)/100;
-			change.y=(float)(Random()%100)/100;
-			change.z=(float)(Random()%100)/100;
+			change.x=(float)(rand()%100)/100;
+			change.y=(float)(rand()%100)/100;
+			change.z=(float)(rand()%100)/100;
 			skeleton.joints[i].velchange+=change;
-			skeleton.joints[abs(Random()%skeleton.num_joints)].velchange-=change;
+			skeleton.joints[abs(rand()%skeleton.num_joints)].velchange-=change;
 		}
 
 		if(checkcollision){
@@ -1665,7 +1665,7 @@ void Person::RagDoll(bool checkcollision){
 		}
 		velocity/=skeleton.num_joints;
 
-		if(Random()%2==0){
+		if(rand()%2==0){
 			if(weaponactive!=-1&&targetanimation!=rabbitkickanim&&num_weapons>0){
 				weapons.owner[weaponids[0]]=-1;
 				weapons.hitsomething[weaponids[0]]=0;
@@ -2006,7 +2006,7 @@ void	Person::DoAnimations(){
 			}
 
 			if(targetanimation==rabbittacklinganim&&targetframe==1){
-				//if(victim->aitype==attacktypecutoff&&Random()%2==0&&victim->stunned<=0&&animation[victim->targetanimation].attack==neutral&&victim->id!=0)Reverse();
+				//if(victim->aitype==attacktypecutoff&&rand()%2==0&&victim->stunned<=0&&animation[victim->targetanimation].attack==neutral&&victim->id!=0)Reverse();
 				if(victim->aitype==attacktypecutoff&&victim->stunned<=0&&victim->surprised<=0&&victim->id!=0)Reverse();
 				if(targetanimation==rabbittacklinganim&&targetframe==1&&!victim->isCrouch()&&victim->targetanimation!=backhandspringanim){
 					if(normaldotproduct(victim->facing,facing)>0)victim->targetanimation=rabbittackledbackanim;
@@ -2116,7 +2116,7 @@ void	Person::DoAnimations(){
 					}
 					if(animation[targetanimation].label[targetframe]==4&&(weaponactive==-1||(targetanimation!=knifeslashstartanim&&targetanimation!=knifethrowanim&&targetanimation!=crouchstabanim&&targetanimation!=swordgroundstabanim&&targetanimation!=knifefollowanim))){
 						if(animation[targetanimation].attack!=neutral){
-							i=abs(Random()%3);
+							i=abs(rand()%3);
 							if(i==0)whichsound=lowwhooshsound;
 							if(i==1)whichsound=midwhooshsound;
 							if(i==2)whichsound=highwhooshsound;
@@ -2167,7 +2167,7 @@ void	Person::DoAnimations(){
 								vel[2]=velocity.z;
 								if(animation[targetanimation].label[targetframe]==4&&aitype!=playercontrolled){
 									if(animation[targetanimation].attack!=neutral){
-										i=abs(Random()%4);
+										i=abs(rand()%4);
 										if(creature==rabbittype){
 											if(i==0)whichsound=rabbitattacksound;
 											if(i==1)whichsound=rabbitattack2sound;
@@ -2473,7 +2473,7 @@ void	Person::DoAnimations(){
 									if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*3&&3&&animation[victim->targetanimation].height!=lowheight){
 										escapednum=0;
 										if(id==0)camerashake+=.4;
-										if(Random()%2||creature==wolftype){
+										if(rand()%2||creature==wolftype){
 											victim->spurt=1;
 											DoBlood(.2,250);
 											if(creature==wolftype)DoBloodBig(0,250);
@@ -2524,7 +2524,7 @@ void	Person::DoAnimations(){
 									if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*3&&3&&animation[victim->targetanimation].height!=lowheight){
 										escapednum=0;
 										if(id==0)camerashake+=.4;
-										if(Random()%2||creature==wolftype){
+										if(rand()%2||creature==wolftype){
 											victim->spurt=1;
 											if(creature==wolftype)DoBloodBig(0,235);
 										}
@@ -2680,7 +2680,7 @@ void	Person::DoAnimations(){
 									if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*3&&animation[victim->targetanimation].height!=lowheight){
 										escapednum=0;
 										if(id==0)camerashake+=.4;
-										if(Random()%2){
+										if(rand()%2){
 											victim->spurt=1;
 											DoBlood(.2,235);
 										}
@@ -2862,7 +2862,7 @@ void	Person::DoAnimations(){
 										if(!victim->skeleton.free)hasvictim=0;
 
 									if(!hasvictim){
-										terrain.MakeDecal(blooddecalfast,(weapons.tippoint[weaponids[weaponactive]]*.8+weapons.position[weaponids[weaponactive]]*.2),.08,.6,Random()%360);
+										terrain.MakeDecal(blooddecalfast,(weapons.tippoint[weaponids[weaponactive]]*.8+weapons.position[weaponids[weaponactive]]*.2),.08,.6,rand()%360);
 										PlaySoundEx( knifesheathesound, samp[knifesheathesound], NULL, true);
 										OPENAL_3D_SetAttributes(channels[knifesheathesound], gLoc, vel);
 										OPENAL_SetVolume(channels[knifesheathesound], 128);
@@ -3064,7 +3064,7 @@ void	Person::DoAnimations(){
 									if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*3){
 										escapednum=0;
 										if(id==0)camerashake+=.4;
-										if(Random()%2){
+										if(rand()%2){
 											victim->spurt=1;
 											DoBlood(.2,235);
 										}
@@ -3223,8 +3223,8 @@ void	Person::DoAnimations(){
 
 										if(weaponactive!=-1){
 											if(weapons.type[victim->weaponids[0]]==staff||weapons.type[weaponids[0]]==staff){
-												if(weapons.type[victim->weaponids[0]]==staff)weapons.damage[victim->weaponids[0]]+=.2+float(abs(Random()%100)-50)/250;
-												if(weapons.type[weaponids[0]]==staff)weapons.damage[weaponids[0]]+=.2+float(abs(Random()%100)-50)/250;
+												if(weapons.type[victim->weaponids[0]]==staff)weapons.damage[victim->weaponids[0]]+=.2+float(abs(rand()%100)-50)/250;
+												if(weapons.type[weaponids[0]]==staff)weapons.damage[weaponids[0]]+=.2+float(abs(rand()%100)-50)/250;
 
 												PlaySoundEx( swordstaffsound, samp[swordstaffsound], NULL, true);
 												OPENAL_3D_SetAttributes(channels[swordstaffsound], gLoc, vel);
@@ -3251,7 +3251,7 @@ void	Person::DoAnimations(){
 										aim=victim->coords+DoRotation(victim->skeleton.joints[victim->skeleton.jointlabels[abdomen]].position,0,victim->rotation,0)*victim->scale+victim->velocity*findDistance(&victim->coords,&coords)/50-(coords+DoRotation(skeleton.joints[skeleton.jointlabels[righthand]].position,0,rotation,0)*scale);
 										Normalise(&aim);
 										/*if(victim->targetanimation==jumpupanim||victim->targetanimation==jumpdownanim){
-										aim=DoRotation(aim,(float)abs(Random()%15)-7,(float)abs(Random()%15)-7,0);
+										aim=DoRotation(aim,(float)abs(rand()%15)-7,(float)abs(rand()%15)-7,0);
 										}*/
 										weapons.velocity[weaponids[0]]=aim*50;
 										weapons.tipvelocity[weaponids[0]]=aim*50;
@@ -3272,7 +3272,7 @@ void	Person::DoAnimations(){
 									if(hasvictim)
 										if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*4.5&&/*animation[victim->targetanimation].height!=lowheight&&*/victim->targetanimation!=dodgebackanim&&victim->targetanimation!=rollanim){
 											escapednum=0;
-											//if(Random()%2){
+											//if(rand()%2){
 											if(tutoriallevel!=1)victim->DoBloodBig(1.5/victim->armorhigh,225);
 											//}
 
@@ -3323,8 +3323,8 @@ void	Person::DoAnimations(){
 												if(bloodtoggle)sprites.MakeSprite(cloudimpactsprite, footpoint,footvel, 1,0,0, .6, .3);
 												footvel=DoRotation(facing,0,90,0)*.8;
 												//footvel.y-=.3;
-												sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
-												sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
+												sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
+												sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
 												sprites.MakeSprite(bloodflamesprite, footpoint,footvel*5, 1,1,1, .2, 1);
 												sprites.MakeSprite(bloodflamesprite, footpoint,footvel*2, 1,1,1, .2, 1);
 											}
@@ -3336,7 +3336,7 @@ void	Person::DoAnimations(){
 								}
 								if(targetanimation==swordslashanim&&animation[targetanimation].label[currentframe]==5&&victim->targetanimation!=rollanim){
 									if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*6.5&&victim->targetanimation!=dodgebackanim){
-										if(victim->weaponactive==-1||normaldotproduct(victim->facing,victim->coords-coords)>0||(Random()%2==0)){
+										if(victim->weaponactive==-1||normaldotproduct(victim->facing,victim->coords-coords)>0||(rand()%2==0)){
 											if(id==0){
 												bonus=Slashbonus;
 												bonustime=0;
@@ -3377,7 +3377,7 @@ void	Person::DoAnimations(){
 												weapons.blooddrip[weaponids[weaponactive]]+=3;
 
 												float bloodlossamount;
-												bloodlossamount=200+abs((float)(Random()%40))-20;
+												bloodlossamount=200+abs((float)(rand()%40))-20;
 												victim->bloodloss+=bloodlossamount/victim->armorhigh;
 												//victim->bloodloss+=100*(6.5-findDistancefast(&coords,&victim->coords));
 												victim->DoDamage(damagemult*0);
@@ -3393,8 +3393,8 @@ void	Person::DoAnimations(){
 												if(bloodtoggle)sprites.MakeSprite(cloudimpactsprite, footpoint,footvel, 1,0,0, .9, .3);
 												footvel=DoRotation(facing,0,90,0)*.8;
 												footvel.y-=.3;
-												sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
-												sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
+												sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
+												sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
 												sprites.MakeSprite(bloodflamesprite, footpoint,footvel*5, 1,1,1, .3, 1);
 												sprites.MakeSprite(bloodflamesprite, footpoint,footvel*2, 1,1,1, .3, 1);
 											}
@@ -3412,8 +3412,8 @@ void	Person::DoAnimations(){
 											vel[2]=velocity.z;
 											if(victim->weaponactive!=-1){
 												if(weapons.type[victim->weaponids[0]]==staff||weapons.type[weaponids[0]]==staff){
-													if(weapons.type[victim->weaponids[0]]==staff)weapons.damage[victim->weaponids[0]]+=.2+float(abs(Random()%100)-50)/250;
-													if(weapons.type[weaponids[0]]==staff)weapons.damage[weaponids[0]]+=.2+float(abs(Random()%100)-50)/250;
+													if(weapons.type[victim->weaponids[0]]==staff)weapons.damage[victim->weaponids[0]]+=.2+float(abs(rand()%100)-50)/250;
+													if(weapons.type[weaponids[0]]==staff)weapons.damage[weaponids[0]]+=.2+float(abs(rand()%100)-50)/250;
 
 													PlaySoundEx( swordstaffsound, samp[swordstaffsound], NULL, true);
 													OPENAL_3D_SetAttributes(channels[swordstaffsound], gLoc, vel);
@@ -3468,10 +3468,10 @@ void	Person::DoAnimations(){
 								if(targetanimation==staffhitanim&&animation[targetanimation].label[currentframe]==5&&victim->targetanimation!=rollanim){
 									if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*6.5&&victim->targetanimation!=dodgebackanim&&victim->targetanimation!=sweepanim){
 										if(tutoriallevel!=1){
-											weapons.damage[weaponids[0]]+=.4+float(abs(Random()%100)-50)/250;
+											weapons.damage[weaponids[0]]+=.4+float(abs(rand()%100)-50)/250;
 											escapednum=0;
 											if(id==0)camerashake+=.4;
-											if(Random()%2||creature==wolftype){
+											if(rand()%2||creature==wolftype){
 												victim->spurt=1;
 											}
 											float gLoc[3];
@@ -3517,10 +3517,10 @@ void	Person::DoAnimations(){
 								if(targetanimation==staffspinhitanim&&animation[targetanimation].label[currentframe]==5&&victim->targetanimation!=rollanim){
 									if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*6.5&&victim->targetanimation!=dodgebackanim&&victim->targetanimation!=sweepanim){
 										if(tutoriallevel!=1){
-											weapons.damage[weaponids[0]]+=.6+float(abs(Random()%100)-50)/250;
+											weapons.damage[weaponids[0]]+=.6+float(abs(rand()%100)-50)/250;
 											escapednum=0;
 											if(id==0)camerashake+=.4;
-											if(Random()%2||creature==wolftype){
+											if(rand()%2||creature==wolftype){
 												victim->spurt=1;
 											}
 											float gLoc[3];
@@ -3564,9 +3564,9 @@ void	Person::DoAnimations(){
 									if(findDistancefast(&coords,&victim->coords)<(scale*5)*(scale*5)*6.5){
 										escapednum=0;
 										if(tutoriallevel!=1){
-											if(!victim->dead)weapons.damage[weaponids[0]]+=.4+float(abs(Random()%100)-50)/500;
+											if(!victim->dead)weapons.damage[weaponids[0]]+=.4+float(abs(rand()%100)-50)/500;
 											if(id==0)camerashake+=.4;
-											if(Random()%2||creature==wolftype){
+											if(rand()%2||creature==wolftype){
 												victim->spurt=1;
 											}
 											float gLoc[3];
@@ -3610,7 +3610,7 @@ void	Person::DoAnimations(){
 										}
 										if(victim->dead){
 											for(i=0;i<victim->skeleton.num_joints;i++){
-												victim->skeleton.joints[i].velocity=relative*damagemult*abs(Random()%20);
+												victim->skeleton.joints[i].velocity=relative*damagemult*abs(rand()%20);
 											}
 											//FootLand(1,2);
 											//victim->skeleton.joints[victim->skeleton.jointlabels[abdomen]].velocity+=relative*damagemult*20;
@@ -3651,7 +3651,7 @@ void	Person::DoAnimations(){
 										}
 
 										if(animation[victim->targetanimation].height==lowheight){
-											if(Random()%2){
+											if(rand()%2){
 												victim->spurt=1;
 												DoBlood(.2,250);
 											}
@@ -3780,11 +3780,11 @@ void	Person::DoAnimations(){
 									}
 								}
 							}
-							if(animation[targetanimation].attack==reversal&&(!victim->feint||(victim->lastattack==victim->lastattack2&&victim->lastattack2==victim->lastattack3&&Random()%2)||targetanimation==knifefollowanim)){
+							if(animation[targetanimation].attack==reversal&&(!victim->feint||(victim->lastattack==victim->lastattack2&&victim->lastattack2==victim->lastattack3&&rand()%2)||targetanimation==knifefollowanim)){
 								if(targetanimation==spinkickreversalanim&&animation[targetanimation].label[currentframe]==7){
 									escapednum=0;
 									if(id==0)camerashake+=.4;
-									if(Random()%2){
+									if(rand()%2){
 										victim->spurt=1;
 										DoBlood(.2,230);
 									}
@@ -3854,7 +3854,7 @@ void	Person::DoAnimations(){
 								if(targetanimation==staffhitreversalanim&&animation[targetanimation].label[currentframe]==5){
 									escapednum=0;
 									if(id==0)camerashake+=.4;
-									if(Random()%2){
+									if(rand()%2){
 										victim->spurt=1;
 										DoBlood(.2,230);
 									}
@@ -3888,7 +3888,7 @@ void	Person::DoAnimations(){
 								if(targetanimation==staffspinhitreversalanim&&animation[targetanimation].label[currentframe]==7){
 									escapednum=0;
 									if(id==0)camerashake+=.4;
-									if(Random()%2){
+									if(rand()%2){
 										victim->spurt=1;
 										DoBlood(.2,230);
 									}
@@ -4049,7 +4049,7 @@ void	Person::DoAnimations(){
 								if(hasvictim&&targetanimation==knifeslashreversalanim&&animation[targetanimation].label[currentframe]==7){
 									escapednum=0;
 									if(id==0)camerashake+=.4;
-									if(Random()%2){
+									if(rand()%2){
 										victim->spurt=1;
 										DoBlood(.2,230);
 									}
@@ -4152,7 +4152,7 @@ void	Person::DoAnimations(){
 											bloodvel=0;
 											bloodvel.z=20;
 											bloodvel.y=5;
-											bloodvel=DoRotation(bloodvel,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
+											bloodvel=DoRotation(bloodvel,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
 											sprites.MakeSprite(bloodsprite, DoRotation(skeleton.joints[skeleton.jointlabels[neck]].position,0,rotation,0)*scale+coords,bloodvel, 1,1,1, .05, 1);
 											*/
 											XYZ footvel,footpoint;
@@ -4160,8 +4160,8 @@ void	Person::DoAnimations(){
 											footpoint=weapons.tippoint[weaponids[0]];
 											if(bloodtoggle)sprites.MakeSprite(cloudimpactsprite, footpoint,footvel, 1,0,0, .9, .3);
 											footvel=(weapons.tippoint[weaponids[0]]-weapons.position[weaponids[0]]);
-											sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
-											sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
+											sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
+											sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
 											sprites.MakeSprite(bloodflamesprite, footpoint,footvel*5, 1,1,1, .3, 1);
 											sprites.MakeSprite(bloodflamesprite, footpoint,footvel*2, 1,1,1, .3, 1);
 											victim->DoBloodBig(200,195);
@@ -4184,8 +4184,8 @@ void	Person::DoAnimations(){
 											footpoint=weapons.tippoint[weaponids[0]];
 											if(bloodtoggle)sprites.MakeSprite(cloudimpactsprite, footpoint,footvel, 1,0,0, .9, .3);
 											footvel=(weapons.tippoint[weaponids[0]]-weapons.position[weaponids[0]])*-1;
-											sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
-											sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
+											sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
+											sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
 											sprites.MakeSprite(bloodflamesprite, footpoint,footvel*5, 1,1,1, .2, 1);
 											sprites.MakeSprite(bloodflamesprite, footpoint,footvel*2, 1,1,1, .2, 1);
 
@@ -4242,8 +4242,8 @@ void	Person::DoAnimations(){
 										footpoint=weapons.tippoint[weaponids[0]];
 										if(bloodtoggle)sprites.MakeSprite(cloudimpactsprite, footpoint,footvel, 1,0,0, .9, .3);
 										footvel=(weapons.tippoint[weaponids[0]]-weapons.position[weaponids[0]])*-1;
-										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
-										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
+										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
+										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
 										sprites.MakeSprite(bloodflamesprite, footpoint,footvel*5, 1,1,1, .3, 1);
 										sprites.MakeSprite(bloodflamesprite, footpoint,footvel*2, 1,1,1, .3, 1);
 									}
@@ -4264,10 +4264,10 @@ void	Person::DoAnimations(){
 										footpoint=(weapons.tippoint[weaponids[0]]+weapons.position[weaponids[0]])/2;
 										if(bloodtoggle)sprites.MakeSprite(cloudimpactsprite, footpoint,footvel, 1,0,0, .9, .3);
 										footvel=(weapons.tippoint[weaponids[0]]-weapons.position[weaponids[0]]);
-										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
-										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
-										sprites.MakeSprite(bloodflamesprite, footpoint,DoRotation(footvel*5,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .3, 1);
-										sprites.MakeSprite(bloodflamesprite, footpoint,DoRotation(footvel*3,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .3, 1);
+										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
+										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
+										sprites.MakeSprite(bloodflamesprite, footpoint,DoRotation(footvel*5,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .3, 1);
+										sprites.MakeSprite(bloodflamesprite, footpoint,DoRotation(footvel*3,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .3, 1);
 										victim->DoBloodBig(200,180);
 										victim->DoBloodBig(200,215);
 										victim->bloodloss+=10000;
@@ -4316,8 +4316,8 @@ void	Person::DoAnimations(){
 										footpoint=weapons.tippoint[weaponids[0]];
 										if(bloodtoggle)sprites.MakeSprite(cloudimpactsprite, footpoint,footvel, 1,0,0, .9, .3);
 										footvel=(weapons.tippoint[weaponids[0]]-weapons.position[weaponids[0]])*-1;
-										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
-										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(Random()%20),(float)(Random()%20),0), 1,1,1, .05, .9);
+										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*7,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
+										sprites.MakeSprite(bloodsprite,footpoint,DoRotation(footvel*3,(float)(rand()%20),(float)(rand()%20),0), 1,1,1, .05, .9);
 										sprites.MakeSprite(bloodflamesprite, footpoint,footvel*5, 1,1,1, .3, 1);
 										sprites.MakeSprite(bloodflamesprite, footpoint,footvel*2, 1,1,1, .3, 1);
 									}
@@ -4326,7 +4326,7 @@ void	Person::DoAnimations(){
 								if(targetanimation==sweepreversalanim&&animation[targetanimation].label[currentframe]==7){
 									escapednum=0;
 									if(id==0)camerashake+=.4;
-									if(Random()%2){
+									if(rand()%2){
 										victim->spurt=1;
 										DoBlood(.2,240);
 									}
@@ -5006,7 +5006,7 @@ void	Person::DoStuff(){
 	onfiredelay-=multiplier;
 	if(onfiredelay<0&&onfire)
 	{
-		if(Random()%2==0){
+		if(rand()%2==0){
 			crouchkeydown=1;
 		}
 		onfiredelay=0.3;
@@ -5058,7 +5058,7 @@ void	Person::DoStuff(){
 		toggledelay-=multiplier;
 		if(toggledelay<0){
 		toggledelay=1;
-		if(Random()%3==0)superruntoggle=1-superruntoggle;
+		if(rand()%3==0)superruntoggle=1-superruntoggle;
 		}*/
 	}
 	if(weaponactive==-1&&num_weapons>0){
@@ -5093,22 +5093,22 @@ void	Person::DoStuff(){
 	}
 	while(flamedelay<0&&onfire){
 		flamedelay+=.006;
-		howmany=abs(Random()%(skeleton.num_joints));
+		howmany=abs(rand()%(skeleton.num_joints));
 		if(!skeleton.free)flatvelocity=(coords-oldcoords)/multiplier/2;//velocity/2;
 		if(skeleton.free)flatvelocity=skeleton.joints[howmany].velocity*scale/2;
 		if(!skeleton.free)flatfacing=DoRotation(DoRotation(DoRotation(skeleton.joints[howmany].position,0,0,tilt),tilt2,0,0),0,rotation,0)*scale+coords;
 		if(skeleton.free)flatfacing=skeleton.joints[howmany].position*scale+coords;
-		sprites.MakeSprite(flamesprite, flatfacing,flatvelocity, 1,1,1, .6+(float)abs(Random()%100)/200-.25, 1);
+		sprites.MakeSprite(flamesprite, flatfacing,flatvelocity, 1,1,1, .6+(float)abs(rand()%100)/200-.25, 1);
 	}
 
 	while(flamedelay<0&&!onfire&&tutoriallevel==1&&id!=0){
 		flamedelay+=.05;
-		howmany=abs(Random()%(skeleton.num_joints));
+		howmany=abs(rand()%(skeleton.num_joints));
 		if(!skeleton.free)flatvelocity=(coords-oldcoords)/multiplier/2;//velocity/2;
 		if(skeleton.free)flatvelocity=skeleton.joints[howmany].velocity*scale/2;
 		if(!skeleton.free)flatfacing=DoRotation(DoRotation(DoRotation(skeleton.joints[howmany].position,0,0,tilt),tilt2,0,0),0,rotation,0)*scale+coords;
 		if(skeleton.free)flatfacing=skeleton.joints[howmany].position*scale+coords;
-		sprites.MakeSprite(breathsprite, flatfacing,flatvelocity, 1,1,1, .6+(float)abs(Random()%100)/200-.25, .3);
+		sprites.MakeSprite(breathsprite, flatfacing,flatvelocity, 1,1,1, .6+(float)abs(rand()%100)/200-.25, .3);
 	}
 
 	if(bleeding>0){
@@ -5128,13 +5128,13 @@ void	Person::DoStuff(){
 			bloodvel=0;
 			if(!skeleton.free){
 				bloodvel.z=5*neckspurtamount;
-				bloodvel=DoRotation(bloodvel,((float)(Random()%100))/40,rotation+((float)(Random()%100))/40,0)*scale;
+				bloodvel=DoRotation(bloodvel,((float)(rand()%100))/40,rotation+((float)(rand()%100))/40,0)*scale;
 			}
 			if(skeleton.free){
-				bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(Random()%100))/40,((float)(Random()%100))/40,0);
+				bloodvel-=DoRotation(skeleton.forward*10*scale,((float)(rand()%100))/40,((float)(rand()%100))/40,0);
 			}
-			if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(Random()%100))/40,rotation+((float)(Random()%100))/40,0)*scale;
-			if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(Random()%100))/40,((float)(Random()%100))/40,0)*scale;
+			if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[head]].velocity,((float)(rand()%100))/40,rotation+((float)(rand()%100))/40,0)*scale;
+			if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(rand()%100))/40,((float)(rand()%100))/40,0)*scale;
 			if(skeleton.free)sprites.MakeSprite(bloodsprite, (skeleton.joints[skeleton.jointlabels[neck]].position+(skeleton.joints[skeleton.jointlabels[neck]].position-skeleton.joints[skeleton.jointlabels[head]].position)/5)*scale+coords,bloodvel, 1,1,1, .05, .9);
 			if(!skeleton.free)sprites.MakeSprite(bloodsprite, DoRotation(skeleton.joints[skeleton.jointlabels[neck]].position+(skeleton.joints[skeleton.jointlabels[neck]].position-skeleton.joints[skeleton.jointlabels[head]].position)/5,0,rotation,0)*scale+coords,bloodvel, 1,1,1, .05, .9);
 			neckspurtparticledelay=.05;
@@ -5152,8 +5152,8 @@ void	Person::DoStuff(){
 			XYZ bloodvel;
 			if(bloodtoggle){
 				bloodvel=0;
-				if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[abdomen]].velocity,((float)(Random()%100))/4,rotation+((float)(Random()%100))/4,0)*scale;
-				if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(Random()%100))/4,((float)(Random()%100))/4,0)*scale;
+				if(skeleton.free)bloodvel+=DoRotation(skeleton.joints[skeleton.jointlabels[abdomen]].velocity,((float)(rand()%100))/4,rotation+((float)(rand()%100))/4,0)*scale;
+				if(!skeleton.free)bloodvel+=DoRotation(velocity,((float)(rand()%100))/4,((float)(rand()%100))/4,0)*scale;
 				if(skeleton.free)sprites.MakeSprite(bloodsprite, skeleton.joints[skeleton.jointlabels[abdomen]].position*scale+coords,bloodvel, 1,1,1, .05, 1);
 				if(!skeleton.free)sprites.MakeSprite(bloodsprite, DoRotation((skeleton.joints[skeleton.jointlabels[abdomen]].position+skeleton.joints[skeleton.jointlabels[abdomen]].position)/2,0,rotation,0)*scale+coords,bloodvel, 1,1,1, .05, 1);
 			}
@@ -5224,8 +5224,8 @@ void	Person::DoStuff(){
 		startx=0;
 		starty=0;
 		texdetailint=realtexdetail;
-		startx=bleedy;//abs(Random()%(skeleton.skinsize-bloodsize-1));
-		starty=bleedx;//abs(Random()%(skeleton.skinsize-bloodsize-1));
+		startx=bleedy;//abs(rand()%(skeleton.skinsize-bloodsize-1));
+		starty=bleedx;//abs(rand()%(skeleton.skinsize-bloodsize-1));
 		endx=startx+bloodsize;
 		endy=starty+bloodsize;
 
@@ -5242,8 +5242,8 @@ void	Person::DoStuff(){
 
 		for(i=startx;i<endx;i++){
 			for(j=starty;j<endy;j++){
-				if(Random()%2==0){
-					color=Random()%85+170;
+				if(rand()%2==0){
+					color=rand()%85+170;
 					if(skeleton.skinText[i*skeleton.skinsize*3+j*3+0]>color/2)skeleton.skinText[i*skeleton.skinsize*3+j*3+0]=color/2;
 					skeleton.skinText[i*skeleton.skinsize*3+j*3+1]=0;
 					skeleton.skinText[i*skeleton.skinsize*3+j*3+2]=0;
@@ -5257,13 +5257,13 @@ void	Person::DoStuff(){
 
 		if(!skeleton.free){
 			bleedy-=4/realtexdetail;
-			if(detail==2)bleedx+=(abs(Random()%3)-1)*2/realtexdetail;
-			else bleedx+=(abs(Random()%3)-1)*4/realtexdetail;
+			if(detail==2)bleedx+=(abs(rand()%3)-1)*2/realtexdetail;
+			else bleedx+=(abs(rand()%3)-1)*4/realtexdetail;
 		}
 		if(skeleton.free){
 			bleedx+=4*direction/realtexdetail;
-			if(detail==2)bleedy+=(abs(Random()%3)-1)*2/realtexdetail;
-			else bleedy+=(abs(Random()%3)-1)*4/realtexdetail;
+			if(detail==2)bleedy+=(abs(rand()%3)-1)*2/realtexdetail;
+			else bleedy+=(abs(rand()%3)-1)*4/realtexdetail;
 		}
 	}
 
@@ -5391,7 +5391,7 @@ void	Person::DoStuff(){
 				headmorphness=0;
 				targetheadmorphness=1;
 				headmorphend=3;
-				blinkdelay=(float)(abs(Random()%40))/5;
+				blinkdelay=(float)(abs(rand()%40))/5;
 			}
 			if(headmorphstart==3&&headmorphend==3){
 				headmorphness=0;
@@ -5406,7 +5406,7 @@ void	Person::DoStuff(){
 					headmorphness=0;
 					targetheadmorphness=1;
 					headmorphend=5;
-					twitchdelay=(float)(abs(Random()%40))/5;
+					twitchdelay=(float)(abs(rand()%40))/5;
 				}
 				if(headmorphstart==5&&headmorphend==5){
 					headmorphness=0;
@@ -5416,12 +5416,12 @@ void	Person::DoStuff(){
 			}
 			if((isIdle()||isCrouch())&&targetanimation!=hurtidleanim){
 				twitchdelay3-=multiplier*1;
-				if(Random()%2==0){
+				if(rand()%2==0){
 					if(righthandmorphstart==0&&righthandmorphend==0&&twitchdelay3<=0){
 						righthandmorphness=0;
 						targetrighthandmorphness=1;
 						righthandmorphend=1;
-						if(Random()%2==0)twitchdelay3=(float)(abs(Random()%40))/5;
+						if(rand()%2==0)twitchdelay3=(float)(abs(rand()%40))/5;
 					}
 					if(righthandmorphstart==1&&righthandmorphend==1){
 						righthandmorphness=0;
@@ -5429,12 +5429,12 @@ void	Person::DoStuff(){
 						righthandmorphend=0;
 					}
 				}
-				if(Random()%2==0){
+				if(rand()%2==0){
 					if(lefthandmorphstart==0&&lefthandmorphend==0&&twitchdelay3<=0){
 						lefthandmorphness=0;
 						targetlefthandmorphness=1;
 						lefthandmorphend=1;
-						twitchdelay3=(float)(abs(Random()%40))/5;
+						twitchdelay3=(float)(abs(rand()%40))/5;
 					}
 					if(lefthandmorphstart==1&&lefthandmorphend==1){
 						lefthandmorphness=0;
@@ -5453,7 +5453,7 @@ void	Person::DoStuff(){
 						tailmorphness=0;
 						targettailmorphness=1;
 						tailmorphend=1;
-						twitchdelay2=(float)(abs(Random()%40))/5;
+						twitchdelay2=(float)(abs(rand()%40))/5;
 					}
 					if(tailmorphstart==1&&tailmorphend==1){
 						tailmorphness=0;
@@ -5947,7 +5947,7 @@ void	Person::DoStuff(){
 					targettilt2=0;
 				}
 
-				if((Random()%8==0&&id!=0&&creature==rabbittype)||(Random()%2==0&&id!=0&&creature==wolftype)||(id==0&&crouchkeydown&&(forwardkeydown||backkeydown||leftkeydown||rightkeydown))){
+				if((rand()%8==0&&id!=0&&creature==rabbittype)||(rand()%2==0&&id!=0&&creature==wolftype)||(id==0&&crouchkeydown&&(forwardkeydown||backkeydown||leftkeydown||rightkeydown))){
 					targetanimation=rollanim;
 					targetrotation=lookrotation;
 					if(id==0){
@@ -6125,30 +6125,30 @@ void	Person::DoStuff(){
 								if(detail==2)
 									if(environment!=desertenvironment)
 										for(j=0;j<howmany;j++){
-											tempvel.x=float(abs(Random()%100)-50)/20;
-											tempvel.y=float(abs(Random()%100)-50)/20;
-											tempvel.z=float(abs(Random()%100)-50)/20;
+											tempvel.x=float(abs(rand()%100)-50)/20;
+											tempvel.y=float(abs(rand()%100)-50)/20;
+											tempvel.z=float(abs(rand()%100)-50)/20;
 											pos=coords;
 											pos.y+=1;
-											pos.x+=float(abs(Random()%100)-50)/200;
-											pos.y+=float(abs(Random()%100)-50)/200;
-											pos.z+=float(abs(Random()%100)-50)/200;
-											sprites.MakeSprite(splintersprite, pos,tempvel*.5+velocity*float(abs(Random()%100))/100, 165/255+float(abs(Random()%100)-50)/400,0,0, .2+float(abs(Random()%100)-50)/1300, 1);
+											pos.x+=float(abs(rand()%100)-50)/200;
+											pos.y+=float(abs(rand()%100)-50)/200;
+											pos.z+=float(abs(rand()%100)-50)/200;
+											sprites.MakeSprite(splintersprite, pos,tempvel*.5+velocity*float(abs(rand()%100))/100, 165/255+float(abs(rand()%100)-50)/400,0,0, .2+float(abs(rand()%100)-50)/1300, 1);
 											sprites.special[sprites.numsprites-1]=1;
 										}
 										howmany=findLength(&velocity)*4;
 										if(detail==2)
 											if(environment==snowyenvironment)
 												for(j=0;j<howmany;j++){
-													tempvel.x=float(abs(Random()%100)-50)/20;
-													tempvel.y=float(abs(Random()%100)-50)/20;
-													tempvel.z=float(abs(Random()%100)-50)/20;
+													tempvel.x=float(abs(rand()%100)-50)/20;
+													tempvel.y=float(abs(rand()%100)-50)/20;
+													tempvel.z=float(abs(rand()%100)-50)/20;
 													pos=coords;
 													pos.y+=1;
-													pos.x+=float(abs(Random()%100)-50)/200;
-													pos.y+=float(abs(Random()%100)-50)/200;
-													pos.z+=float(abs(Random()%100)-50)/200;
-													sprites.MakeSprite(splintersprite, pos,tempvel*.3+velocity*float(abs(Random()%100))/100/2, 1,1,1, .1, 1);
+													pos.x+=float(abs(rand()%100)-50)/200;
+													pos.y+=float(abs(rand()%100)-50)/200;
+													pos.z+=float(abs(rand()%100)-50)/200;
+													sprites.MakeSprite(splintersprite, pos,tempvel*.3+velocity*float(abs(rand()%100))/100/2, 1,1,1, .1, 1);
 													sprites.special[sprites.numsprites-1]=2;
 												}
 							}
@@ -6213,32 +6213,32 @@ void	Person::DoStuff(){
 									if(detail==2)
 										if(environment!=desertenvironment)
 											for(j=0;j<howmany;j++){
-												tempvel.x=float(abs(Random()%100)-50)/20;
-												tempvel.y=float(abs(Random()%100)-50)/20;
-												tempvel.z=float(abs(Random()%100)-50)/20;
+												tempvel.x=float(abs(rand()%100)-50)/20;
+												tempvel.y=float(abs(rand()%100)-50)/20;
+												tempvel.z=float(abs(rand()%100)-50)/20;
 												pos=coords;
 												pos+=velocity*.1;
 												pos.y+=1;
-												pos.x+=float(abs(Random()%100)-50)/150;
-												pos.y+=float(abs(Random()%100)-50)/150;
-												pos.z+=float(abs(Random()%100)-50)/150;
-												sprites.MakeSprite(splintersprite, pos,tempvel*.5+velocity*float(abs(Random()%100))/100, 165/255+float(abs(Random()%100)-50)/400,0,0, .2+float(abs(Random()%100)-50)/1300, 1);
+												pos.x+=float(abs(rand()%100)-50)/150;
+												pos.y+=float(abs(rand()%100)-50)/150;
+												pos.z+=float(abs(rand()%100)-50)/150;
+												sprites.MakeSprite(splintersprite, pos,tempvel*.5+velocity*float(abs(rand()%100))/100, 165/255+float(abs(rand()%100)-50)/400,0,0, .2+float(abs(rand()%100)-50)/1300, 1);
 												sprites.special[sprites.numsprites-1]=1;
 											}
 											howmany=findLength(&velocity)*4;
 											if(detail==2)
 												if(environment==snowyenvironment)
 													for(j=0;j<howmany;j++){
-														tempvel.x=float(abs(Random()%100)-50)/20;
-														tempvel.y=float(abs(Random()%100)-50)/20;
-														tempvel.z=float(abs(Random()%100)-50)/20;
+														tempvel.x=float(abs(rand()%100)-50)/20;
+														tempvel.y=float(abs(rand()%100)-50)/20;
+														tempvel.z=float(abs(rand()%100)-50)/20;
 														pos=coords;
 														pos+=velocity*.1;
 														pos.y+=1;
-														pos.x+=float(abs(Random()%100)-50)/150;
-														pos.y+=float(abs(Random()%100)-50)/150;
-														pos.z+=float(abs(Random()%100)-50)/150;
-														sprites.MakeSprite(splintersprite, pos,tempvel*.3+velocity*float(abs(Random()%100))/100/2, 1,1,1, .1, 1);
+														pos.x+=float(abs(rand()%100)-50)/150;
+														pos.y+=float(abs(rand()%100)-50)/150;
+														pos.z+=float(abs(rand()%100)-50)/150;
+														sprites.MakeSprite(splintersprite, pos,tempvel*.3+velocity*float(abs(rand()%100))/100/2, 1,1,1, .1, 1);
 														sprites.special[sprites.numsprites-1]=2;
 													}
 								}
@@ -6264,7 +6264,7 @@ void	Person::DoStuff(){
 					vel[0]=velocity.x;
 					vel[1]=velocity.y;
 					vel[2]=velocity.z;
-					i=abs(Random()%4);
+					i=abs(rand()%4);
 					if(speechdelay<=0){
 						if(creature==rabbittype){
 							if(i==0)whichsound=rabbitchitter;
@@ -7222,7 +7222,7 @@ int Person::DrawSkeleton(){
 						}
 					glPopMatrix();
 				}
-				updatedelay=1+(float)(Random()%100)/1000;
+				updatedelay=1+(float)(rand()%100)/1000;
 			}
 			if(skeleton.free!=2&&(skeleton.free==1||skeleton.free==3||id==0||(normalsupdatedelay<=0)||targetanimation==getupfromfrontanim||targetanimation==getupfrombackanim||currentanimation==getupfromfrontanim||currentanimation==getupfrombackanim)){
 				normalsupdatedelay=1;

@@ -677,7 +677,7 @@ void Game::LoadingScreen()
 		loadprogress=loadtime;
 		if(loadprogress>100)loadprogress=100;
 
-		//loadprogress=abs(Random()%100);
+		//loadprogress=abs(rand()%100);
 
 		//Background
 
@@ -899,7 +899,7 @@ void Game::FadeLoadingScreen(float howmuch)
 
 	loadprogress=howmuch;
 
-	//loadprogress=abs(Random()%100);
+	//loadprogress=abs(rand()%100);
 
 	//Background
 
@@ -1376,7 +1376,7 @@ void Game::LoadStuff()
 
 	//temptexdetail=texdetail;
 	//texdetail=1;
-	i=abs(Random()%4);
+	i=abs(rand()%4);
 	LoadTexture(":Data:Textures:fire.jpg",&loadscreentexture,1,0);
 	//texdetail=temptexdetail;
 

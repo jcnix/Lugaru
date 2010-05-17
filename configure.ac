@@ -1,6 +1,6 @@
 AC_INIT(lugaru, 1.0, jonescaseyb@gmail.com)
 AM_INIT_AUTOMAKE(lugaru, 1.0)
-AC_CONFIG_HEADERS(src/config.h)
+AC_CONFIG_HEADERS(Source/config.h)
 AC_PROG_INSTALL
 AC_CONFIG_MACRO_DIR([m4])
 AC_PREFIX_DEFAULT(/usr/games)

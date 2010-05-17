@@ -31,8 +31,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #endif
 
 
-
-#include "Game.h"
+#include "config.h"
+#include "TGALoader.h"
 extern "C" {
 	#include "zlib.h"
 	#include "png.h"
@@ -44,6 +44,7 @@ extern "C" {
 		#include "jpeglib.h"
 	#endif
 }
+#include "Game.h"
 
 static bool load_image(const char * fname, TGAImageRec & tex);
 static bool load_png(const char * fname, TGAImageRec & tex);
@@ -122,7 +123,7 @@ extern float volume;
 #include <shellapi.h>
 #endif
 
-#include "res/resource.h"
+#include "win-res/resource.h"
 
 using namespace std;
 
@@ -573,7 +574,7 @@ Boolean SetUp (Game & game)
 
 	LOGFUNC;
 
-	randSeed = UpTime().lo;
+	srand(time(NULL));
 
 	osx = 0;
 	ifstream ipstream(ConvertFileName(":Data:config.txt"), std::ios::in /*| std::ios::nocreate*/);

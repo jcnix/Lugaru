@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef _MACCOMPATIBLITY_H_
 #define _MACCOMPATIBLITY_H_
 
+#include "config.h"
 #if !PLATFORM_MACOSX
 
 #include <stdio.h>
@@ -64,8 +65,6 @@ struct Point
 typedef signed char SInt8;
 typedef unsigned int UInt32;
 
-
-#include "Random.h"
 
 
 void CopyCStringToPascal( const char* src, unsigned char dst[256]);
